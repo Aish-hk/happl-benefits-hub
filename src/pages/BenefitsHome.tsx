@@ -155,7 +155,21 @@ export default function BenefitsHome() {
                 prefix={stat.prefix}
                 className={`text-4xl font-semibold ${isDark ? "text-white" : "text-foreground"}`}
               />
-              <p className={`text-sm mt-1 font-light ${isDark ? "text-white/70" : "text-muted-foreground"}`}>{stat.sub}</p>
+              {stat.breakdown ? (
+                <div className="flex items-center gap-4 mt-2">
+                  <div>
+                    <p className="text-[10px] text-white/50 font-light">Company</p>
+                    <p className="text-sm font-medium text-white">€{stat.breakdown.company.toLocaleString()}</p>
+                  </div>
+                  <div className="w-px h-6 bg-white/20" />
+                  <div>
+                    <p className="text-[10px] text-white/50 font-light">Personal</p>
+                    <p className="text-sm font-medium text-white">€{stat.breakdown.personal.toLocaleString()}</p>
+                  </div>
+                </div>
+              ) : (
+                <p className={`text-sm mt-1 font-light ${isDark ? "text-white/70" : "text-muted-foreground"}`}>{stat.sub}</p>
+              )}
             </motion.div>
           );
         })}
