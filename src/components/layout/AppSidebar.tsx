@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 import {
   Home,
   ShoppingBag,
-  Shield,
-  Wallet,
-  FileText,
+  CreditCard,
+  Gift,
   Settings,
   LogOut,
   HelpCircle,
@@ -17,10 +16,9 @@ import happlIcon from "@/assets/happl-icon.png";
 
 const navItems = [
   { label: "Home", icon: Home, path: "/" },
-  { label: "Marketplace", icon: ShoppingBag, path: "/marketplace" },
-  { label: "My Benefits", icon: Shield, path: "/my-benefits" },
-  { label: "Claims", icon: FileText, path: "/claims" },
-  { label: "Wallet", icon: Wallet, path: "/wallet" },
+  { label: "Benefits", icon: ShoppingBag, path: "/marketplace" },
+  { label: "Spend", icon: CreditCard, path: "/spend" },
+  { label: "Rewards", icon: Gift, path: "/rewards" },
 ];
 
 const bottomItems = [
@@ -40,17 +38,13 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
   return (
     <motion.aside
       initial={false}
-      animate={{ width: collapsed ? 72 : 240 }}
+      animate={{ width: collapsed ? 72 : 220 }}
       transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
       className="fixed left-0 top-0 h-screen bg-primary flex flex-col z-50 overflow-hidden"
     >
       {/* Logo */}
       <div className={`px-4 py-6 flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 overflow-hidden"
-        >
+        <motion.div className="flex items-center gap-2 overflow-hidden">
           {collapsed ? (
             <img src={happlIcon} alt="Happl" className="w-10 h-10 rounded-lg object-cover" />
           ) : (
@@ -67,7 +61,6 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         )}
       </div>
 
-      {/* Collapse button when collapsed */}
       {collapsed && (
         <button
           onClick={onToggle}
@@ -79,11 +72,6 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
 
       {/* Main Nav */}
       <nav className="flex-1 px-2">
-        {!collapsed && (
-          <p className="px-3 mb-2 text-xs font-medium uppercase tracking-wider text-sidebar-accent-foreground/50">
-            Main
-          </p>
-        )}
         <ul className="space-y-1">
           {navItems.map((item, i) => {
             const isActive =
@@ -145,15 +133,14 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
           </button>
         </div>
 
-        {/* User */}
         {!collapsed && (
           <div className="mt-4 px-3 flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
-              SS
+              SM
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-sidebar-foreground truncate">
-                Sarah Smith
+                Sarah Mitchell
               </p>
               <p className="text-xs text-sidebar-foreground/50 truncate">
                 Acme Corp
@@ -164,7 +151,7 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         {collapsed && (
           <div className="mt-4 flex justify-center">
             <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
-              SS
+              SM
             </div>
           </div>
         )}

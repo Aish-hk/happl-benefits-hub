@@ -5,11 +5,9 @@ import {
   Search,
   SlidersHorizontal,
   ChevronRight,
-  Clock,
   Check,
 } from "lucide-react";
 
-// 3D icons
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
 import iconLifeInsurance from "@/assets/icons/life-insurance.png";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
@@ -122,19 +120,17 @@ export default function Marketplace() {
 
   return (
     <div className="max-w-[1100px]">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-serif text-foreground">Benefits Marketplace</h1>
+        <h1 className="text-3xl font-bold text-foreground">Benefits Marketplace</h1>
         <p className="text-muted-foreground mt-1">
           Explore, compare, and activate your employee benefits
         </p>
       </motion.div>
 
-      {/* Filters */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -171,7 +167,6 @@ export default function Marketplace() {
         </button>
       </motion.div>
 
-      {/* Grid */}
       <motion.div layout className="grid grid-cols-2 gap-4">
         <AnimatePresence mode="popLayout">
           {filtered.map((b, i) => {
@@ -198,7 +193,7 @@ export default function Marketplace() {
                   <img
                     src={b.icon}
                     alt={b.title}
-                    className="w-12 h-12 object-contain shrink-0"
+                    className="w-14 h-14 object-contain shrink-0"
                     loading="lazy"
                   />
                   <div className="flex-1 min-w-0">

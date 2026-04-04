@@ -9,6 +9,8 @@ import Marketplace from "./pages/Marketplace";
 import BenefitInsurance from "./pages/BenefitInsurance";
 import BenefitAllowance from "./pages/BenefitAllowance";
 import EnrollmentFlow from "./pages/EnrollmentFlow";
+import Spend from "./pages/Spend";
+import Rewards from "./pages/Rewards";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/benefit/insurance" element={<BenefitInsurance />} />
             <Route path="/benefit/allowance" element={<BenefitAllowance />} />
             <Route path="/enroll/:benefitId" element={<EnrollmentFlow />} />
+            <Route path="/spend" element={<Spend />} />
+            <Route path="/rewards" element={<Rewards />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
