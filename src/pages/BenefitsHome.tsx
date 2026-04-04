@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Clock, Check } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import happlIcon from "@/assets/happl-icon.png";
+
 
 import iconTotalValue from "@/assets/icons/total-value.png";
 import iconActiveBenefits from "@/assets/icons/active-benefits.png";
@@ -27,7 +27,7 @@ const fadeUp = {
 };
 
 const quickStats = [
-  { label: "TOTAL PACKAGE VALUE", value: 15200, icon: iconTotalValue, prefix: "€", sub: "per year", style: "bg-primary text-white" },
+  { label: "TOTAL CONTRIBUTION", value: 250750, icon: iconTotalValue, prefix: "€", sub: "", style: "bg-primary text-white", breakdown: { company: 238200, personal: 12550 } },
   { label: "ACTIVE BENEFITS", value: 7, icon: iconActiveBenefits, sub: "of 12 total", style: "bg-card border border-primary/40 text-foreground" },
   { label: "NEEDS ATTENTION", value: 3, icon: iconNeedsAttention, sub: "closing soon", style: "bg-card border border-happl-warning/40 text-foreground" },
 ];
@@ -155,7 +155,21 @@ export default function BenefitsHome() {
                 prefix={stat.prefix}
                 className={`text-4xl font-semibold ${isDark ? "text-white" : "text-foreground"}`}
               />
-              <p className={`text-sm mt-1 font-light ${isDark ? "text-white/70" : "text-muted-foreground"}`}>{stat.sub}</p>
+              {stat.breakdown ? (
+                <div className="flex items-center gap-4 mt-2">
+                  <div>
+                    <p className="text-[10px] text-white/50 font-light">Company</p>
+                    <p className="text-sm font-medium text-white">€{stat.breakdown.company.toLocaleString()}</p>
+                  </div>
+                  <div className="w-px h-6 bg-white/20" />
+                  <div>
+                    <p className="text-[10px] text-white/50 font-light">Personal</p>
+                    <p className="text-sm font-medium text-white">€{stat.breakdown.personal.toLocaleString()}</p>
+                  </div>
+                </div>
+              ) : (
+                <p className={`text-sm mt-1 font-light ${isDark ? "text-white/70" : "text-muted-foreground"}`}>{stat.sub}</p>
+              )}
             </motion.div>
           );
         })}
@@ -285,29 +299,11 @@ export default function BenefitsHome() {
                 />
               </div>
 
-              {/* NI Savings Calculator */}
-              <div className="rounded-xl bg-accent/10 border border-accent/20 p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <img src={happlIcon} alt="Happl" className="w-6 h-6 rounded-md object-cover" />
-                  <span className="text-sm font-medium text-foreground">NI Savings Calculator</span>
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <p className="text-[10px] font-medium text-accent tracking-wide">Your Cost</p>
-                    <p className="text-base font-semibold text-foreground">{a.yourCost}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-medium text-accent tracking-wide">Monthly</p>
-                    <p className="text-base font-semibold text-foreground">{a.monthly}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-medium text-accent tracking-wide">Total</p>
-                    <p className="text-base font-semibold text-foreground">{a.totalSaved}</p>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2 mt-3">
+                <span className="text-xs text-muted-foreground font-light">€{a.spent} spent</span>
+                <span className="text-xs text-muted-foreground font-light">·</span>
+                <span className="text-xs text-muted-foreground font-light">{a.resets}</span>
               </div>
-
-              <p className="text-xs text-muted-foreground font-light mt-3">{a.resets}</p>
             </motion.div>
           ))}
         </div>
