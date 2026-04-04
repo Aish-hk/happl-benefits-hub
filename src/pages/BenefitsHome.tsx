@@ -2,15 +2,18 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
-  Shield,
-  Heart,
-  Wallet,
-  Zap,
-  TrendingUp,
-  Clock,
-  CheckCircle2,
   ChevronRight,
 } from "lucide-react";
+import AnimatedCounter from "@/components/AnimatedCounter";
+
+// 3D icons
+import iconCheckCircle from "@/assets/icons/check-circle.png";
+import iconClock from "@/assets/icons/clock.png";
+import iconLifeInsurance from "@/assets/icons/life-insurance.png";
+import iconTrendingUp from "@/assets/icons/trending-up.png";
+import iconHealthInsurance from "@/assets/icons/health-insurance.png";
+import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
+import iconEnrollment from "@/assets/icons/enrollment.png";
 
 const stagger = {
   hidden: {},
@@ -22,10 +25,10 @@ const fadeUp = {
 };
 
 const quickStats = [
-  { label: "Active Benefits", value: "5", icon: CheckCircle2, color: "bg-accent/15 text-accent" },
-  { label: "Pending Enrollment", value: "2", icon: Clock, color: "bg-happl-warning/15 text-happl-warning" },
-  { label: "Total Coverage", value: "€24,000", icon: Shield, color: "bg-happl-info/15 text-happl-info" },
-  { label: "Savings This Year", value: "€3,200", icon: TrendingUp, color: "bg-accent/15 text-accent" },
+  { label: "Active Benefits", value: 5, icon: iconCheckCircle, isNumber: true },
+  { label: "Pending Enrollment", value: 2, icon: iconClock, isNumber: true },
+  { label: "Total Coverage", value: 24000, icon: iconLifeInsurance, prefix: "€", isNumber: true },
+  { label: "Savings This Year", value: 3200, icon: iconTrendingUp, prefix: "€", isNumber: true },
 ];
 
 const featuredBenefits = [
@@ -33,35 +36,32 @@ const featuredBenefits = [
     id: "health-insurance",
     title: "Health Insurance",
     subtitle: "Comprehensive medical, dental & vision",
-    icon: Heart,
+    icon: iconHealthInsurance,
     tag: "Popular",
     tagColor: "bg-accent text-accent-foreground",
-    gradient: "from-[#163b3b] to-[#1f4f4f]",
   },
   {
     id: "flex-allowance",
     title: "Flex Allowance",
     subtitle: "€150/month for wellness & lifestyle",
-    icon: Wallet,
+    icon: iconFlexAllowance,
     tag: "New",
     tagColor: "bg-happl-warning/20 text-happl-warning",
-    gradient: "from-[#04E898] to-[#02b574]",
   },
   {
     id: "life-insurance",
     title: "Life Insurance",
     subtitle: "4x salary coverage included",
-    icon: Shield,
+    icon: iconLifeInsurance,
     tag: "Enrolled",
     tagColor: "bg-muted text-muted-foreground",
-    gradient: "from-[#3B82F6] to-[#2563EB]",
   },
 ];
 
 const recentActivity = [
-  { action: "Health Insurance claim approved", time: "2 hours ago", icon: CheckCircle2 },
-  { action: "Flex allowance — €45 gym membership", time: "Yesterday", icon: Wallet },
-  { action: "Dental check-up reimbursed", time: "3 days ago", icon: Heart },
+  { action: "Health Insurance claim approved", time: "2 hours ago", icon: iconCheckCircle },
+  { action: "Flex allowance — €45 gym membership", time: "Yesterday", icon: iconFlexAllowance },
+  { action: "Dental check-up reimbursed", time: "3 days ago", icon: iconHealthInsurance },
 ];
 
 export default function BenefitsHome() {
@@ -84,14 +84,16 @@ export default function BenefitsHome() {
         {quickStats.map((stat) => (
           <motion.div
             key={stat.label}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.02, y: -2 }}
             className="happl-card flex items-center gap-4"
           >
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.color}`}>
-              <stat.icon size={18} />
-            </div>
+            <img src={stat.icon} alt={stat.label} className="w-11 h-11 object-contain" />
             <div>
-              <p className="text-2xl font-semibold text-foreground">{stat.value}</p>
+              <AnimatedCounter
+                value={stat.value}
+                prefix={stat.prefix}
+                className="text-2xl font-semibold text-foreground"
+              />
               <p className="text-xs text-muted-foreground">{stat.label}</p>
             </div>
           </motion.div>
@@ -106,9 +108,7 @@ export default function BenefitsHome() {
         onClick={() => navigate("/marketplace")}
       >
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
-            <Zap size={22} className="text-accent" />
-          </div>
+          <img src={iconEnrollment} alt="Enrollment" className="w-12 h-12 object-contain" />
           <div>
             <h3 className="text-lg font-semibold text-primary-foreground">
               Open Enrollment Window
@@ -140,7 +140,7 @@ export default function BenefitsHome() {
             </button>
           </motion.div>
           <div className="space-y-3">
-            {featuredBenefits.map((b, i) => (
+            {featuredBenefits.map((b) => (
               <motion.div
                 key={b.id}
                 variants={fadeUp}
@@ -154,11 +154,7 @@ export default function BenefitsHome() {
                   )
                 }
               >
-                <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${b.gradient} flex items-center justify-center`}
-                >
-                  <b.icon size={20} className="text-primary-foreground" />
-                </div>
+                <img src={b.icon} alt={b.title} className="w-12 h-12 object-contain" />
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-foreground">{b.title}</h3>
@@ -186,9 +182,7 @@ export default function BenefitsHome() {
                 transition={{ delay: 0.3 + i * 0.1 }}
                 className="flex items-start gap-3"
               >
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center mt-0.5">
-                  <a.icon size={14} className="text-accent" />
-                </div>
+                <img src={a.icon} alt="" className="w-8 h-8 object-contain mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-foreground">{a.action}</p>
                   <p className="text-xs text-muted-foreground">{a.time}</p>

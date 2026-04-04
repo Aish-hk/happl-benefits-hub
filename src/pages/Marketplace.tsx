@@ -2,20 +2,22 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
-  Heart,
-  Shield,
-  Wallet,
-  Bike,
-  GraduationCap,
-  Baby,
-  Umbrella,
-  Coffee,
   Search,
   SlidersHorizontal,
   ChevronRight,
   Clock,
   Check,
 } from "lucide-react";
+
+// 3D icons
+import iconHealthInsurance from "@/assets/icons/health-insurance.png";
+import iconLifeInsurance from "@/assets/icons/life-insurance.png";
+import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
+import iconCycleToWork from "@/assets/icons/cycle-to-work.png";
+import iconLearning from "@/assets/icons/learning.png";
+import iconParentalLeave from "@/assets/icons/parental-leave.png";
+import iconIncomeProtection from "@/assets/icons/income-protection.png";
+import iconMealAllowance from "@/assets/icons/meal-allowance.png";
 
 const categories = [
   { label: "All", value: "all" },
@@ -30,89 +32,81 @@ const benefits = [
     id: "health-insurance",
     title: "Health Insurance",
     desc: "Comprehensive medical, dental, and vision coverage for you and your family.",
-    icon: Heart,
+    icon: iconHealthInsurance,
     category: "insurance",
     status: "enrolled",
     contribution: "€0/mo (company paid)",
-    gradient: "from-[#163b3b] to-[#1f4f4f]",
   },
   {
     id: "life-insurance",
     title: "Life Insurance",
     desc: "4x annual salary coverage with additional critical illness benefit.",
-    icon: Shield,
+    icon: iconLifeInsurance,
     category: "insurance",
     status: "enrolled",
     contribution: "€0/mo (company paid)",
-    gradient: "from-[#163b3b] to-[#2a5c5c]",
   },
   {
     id: "flex-allowance",
     title: "Flex Allowance",
     desc: "€150/month to spend on wellness, fitness, or lifestyle purchases.",
-    icon: Wallet,
+    icon: iconFlexAllowance,
     category: "allowance",
     status: "active",
     contribution: "€150/mo",
-    gradient: "from-[#04E898] to-[#02b574]",
   },
   {
     id: "cycle-to-work",
     title: "Cycle to Work",
     desc: "Save up to 42% on a new bike and accessories through salary sacrifice.",
-    icon: Bike,
+    icon: iconCycleToWork,
     category: "lifestyle",
     status: "available",
     contribution: "Salary sacrifice",
-    gradient: "from-[#F5A623] to-[#d4901a]",
   },
   {
     id: "learning-budget",
     title: "Learning & Development",
     desc: "€1,000/year for courses, conferences, and professional development.",
-    icon: GraduationCap,
+    icon: iconLearning,
     category: "allowance",
     status: "available",
     contribution: "€1,000/yr",
-    gradient: "from-[#3B82F6] to-[#2563EB]",
   },
   {
     id: "parental-leave",
     title: "Enhanced Parental Leave",
     desc: "26 weeks fully paid leave for all new parents, regardless of gender.",
-    icon: Baby,
+    icon: iconParentalLeave,
     category: "insurance",
     status: "available",
     contribution: "Company benefit",
-    gradient: "from-[#A855F7] to-[#7C3AED]",
   },
   {
     id: "income-protection",
     title: "Income Protection",
     desc: "75% salary replacement if unable to work due to illness or injury.",
-    icon: Umbrella,
+    icon: iconIncomeProtection,
     category: "insurance",
     status: "enrollment",
     contribution: "€12/mo",
-    gradient: "from-[#06B6D4] to-[#0891B2]",
   },
   {
     id: "meal-allowance",
     title: "Meal Allowance",
     desc: "€10/day lunch allowance loaded to your Happl card.",
-    icon: Coffee,
+    icon: iconMealAllowance,
     category: "allowance",
     status: "active",
     contribution: "€200/mo",
-    gradient: "from-[#EF4444] to-[#DC2626]",
   },
 ];
 
-const statusConfig: Record<string, { label: string; color: string; icon: typeof Check }> = {
-  enrolled: { label: "Enrolled", color: "bg-accent/15 text-accent", icon: Check },
-  active: { label: "Active", color: "bg-accent/15 text-accent", icon: Check },
-  available: { label: "Available", color: "bg-happl-info/15 text-happl-info", icon: ChevronRight },
-  enrollment: { label: "Open Enrollment", color: "bg-happl-warning/15 text-happl-warning", icon: Clock },
+const statusConfig: Record<string, { label: string; color: string }> = {
+  enrolled: { label: "Enrolled", color: "bg-accent/15 text-accent" },
+  active: { label: "Active", color: "bg-accent/15 text-accent" },
+  available: { label: "Available", color: "bg-happl-info/15 text-happl-info" },
+  enrollment: { label: "Open Enrollment", color: "bg-happl-warning/15 text-happl-warning" },
 };
 
 export default function Marketplace() {
@@ -201,11 +195,12 @@ export default function Marketplace() {
                 }
               >
                 <div className="flex items-start gap-4">
-                  <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${b.gradient} flex items-center justify-center shrink-0`}
-                  >
-                    <b.icon size={20} className="text-primary-foreground" />
-                  </div>
+                  <img
+                    src={b.icon}
+                    alt={b.title}
+                    className="w-12 h-12 object-contain shrink-0"
+                    loading="lazy"
+                  />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <h3 className="font-semibold text-foreground">{b.title}</h3>
