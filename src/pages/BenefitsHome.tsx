@@ -299,29 +299,11 @@ export default function BenefitsHome() {
                 />
               </div>
 
-              {/* NI Savings Calculator */}
-              <div className="rounded-xl bg-accent/10 border border-accent/20 p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <img src={happlIcon} alt="Happl" className="w-6 h-6 rounded-md object-cover" />
-                  <span className="text-sm font-medium text-foreground">NI Savings Calculator</span>
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <p className="text-[10px] font-medium text-accent tracking-wide">Your Cost</p>
-                    <p className="text-base font-semibold text-foreground">{a.yourCost}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-medium text-accent tracking-wide">Monthly</p>
-                    <p className="text-base font-semibold text-foreground">{a.monthly}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-medium text-accent tracking-wide">Total</p>
-                    <p className="text-base font-semibold text-foreground">{a.totalSaved}</p>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2 mt-3">
+                <span className="text-xs text-muted-foreground font-light">€{a.spent} spent</span>
+                <span className="text-xs text-muted-foreground font-light">·</span>
+                <span className="text-xs text-muted-foreground font-light">{a.resets}</span>
               </div>
-
-              <p className="text-xs text-muted-foreground font-light mt-3">{a.resets}</p>
             </motion.div>
           ))}
         </div>
