@@ -101,21 +101,21 @@ const availableBenefits = [
     subtitle: "Spill · 8 free therapy sessions",
     image: mentalHealthImg,
     tag: "Quick activate",
-    tagColor: "bg-accent/15 text-accent",
+    tagColor: "bg-accent text-white",
   },
   {
     title: "Electric Vehicle Scheme",
     subtitle: "Octopus EV · Save up to 40%",
     image: evSchemeImg,
     tag: "Enrollment open",
-    tagColor: "bg-happl-warning/15 text-happl-warning",
+    tagColor: "bg-happl-warning text-white",
   },
   {
     title: "Travel Insurance",
     subtitle: "AXA · Worldwide cover",
     image: travelInsuranceImg,
     tag: "Quick activate",
-    tagColor: "bg-accent/15 text-accent",
+    tagColor: "bg-accent text-white",
   },
 ];
 

@@ -65,12 +65,10 @@ export default function Marketplace() {
         className="relative rounded-2xl overflow-hidden mb-8 h-[200px]"
       >
         <img src={marketplaceHero} alt="Benefits Marketplace" className="w-full h-full object-cover" width={1200} height={512} />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/40 flex items-center px-10">
-          <div>
-            <p className="text-white/70 text-xs font-medium tracking-wider mb-1">NEW PARTNERSHIP</p>
-            <h2 className="text-2xl text-white font-medium mb-2">Explore your full benefits package</h2>
-            <p className="text-white/80 text-sm font-light max-w-md">Browse, compare, and activate benefits tailored to your needs. New options added regularly.</p>
-          </div>
+        <div className="absolute top-4 left-4">
+          <span className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-[11px] font-medium shadow-md">
+            NEW PARTNERSHIP
+          </span>
         </div>
       </motion.div>
 
