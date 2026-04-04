@@ -1,12 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {
-  ArrowRight,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, ChevronRight, Clock } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-// 3D icons
 import iconCheckCircle from "@/assets/icons/check-circle.png";
 import iconClock from "@/assets/icons/clock.png";
 import iconLifeInsurance from "@/assets/icons/life-insurance.png";
@@ -14,6 +10,8 @@ import iconTrendingUp from "@/assets/icons/trending-up.png";
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
 import iconEnrollment from "@/assets/icons/enrollment.png";
+import iconCycleToWork from "@/assets/icons/cycle-to-work.png";
+import iconLearning from "@/assets/icons/learning.png";
 
 const stagger = {
   hidden: {},
@@ -25,173 +23,224 @@ const fadeUp = {
 };
 
 const quickStats = [
-  { label: "Active Benefits", value: 5, icon: iconCheckCircle, isNumber: true },
-  { label: "Pending Enrollment", value: 2, icon: iconClock, isNumber: true },
-  { label: "Total Coverage", value: 24000, icon: iconLifeInsurance, prefix: "€", isNumber: true },
-  { label: "Savings This Year", value: 3200, icon: iconTrendingUp, prefix: "€", isNumber: true },
+  { label: "TOTAL PACKAGE VALUE", value: 15200, icon: iconTrendingUp, prefix: "€", suffix: "", sub: "per year", isNumber: true },
+  { label: "ACTIVE BENEFITS", value: 7, icon: iconCheckCircle, sub: "of 12 total", isNumber: true },
+  { label: "NEEDS ATTENTION", value: 3, icon: iconClock, sub: "closing soon", isNumber: true, highlight: true },
 ];
 
-const featuredBenefits = [
+const enrollmentItems = [
   {
-    id: "health-insurance",
-    title: "Health Insurance",
-    subtitle: "Comprehensive medical, dental & vision",
+    title: "Private Medical Insurance",
+    provider: "Bupa · Comprehensive PMI",
     icon: iconHealthInsurance,
-    tag: "Popular",
-    tagColor: "bg-accent text-accent-foreground",
+    daysLeft: 14,
   },
   {
-    id: "flex-allowance",
-    title: "Flex Allowance",
-    subtitle: "€150/month for wellness & lifestyle",
-    icon: iconFlexAllowance,
-    tag: "New",
-    tagColor: "bg-happl-warning/20 text-happl-warning",
-  },
-  {
-    id: "life-insurance",
-    title: "Life Insurance",
-    subtitle: "4x salary coverage included",
+    title: "Dental Plan",
+    provider: "Denplan · Routine + emergency",
     icon: iconLifeInsurance,
-    tag: "Enrolled",
-    tagColor: "bg-muted text-muted-foreground",
+    daysLeft: 14,
+  },
+  {
+    title: "Cycle to Work",
+    provider: "Cyclescheme · Salary sacrifice",
+    icon: iconCycleToWork,
+    daysLeft: 30,
   },
 ];
 
-const recentActivity = [
-  { action: "Health Insurance claim approved", time: "2 hours ago", icon: iconCheckCircle },
-  { action: "Flex allowance — €45 gym membership", time: "Yesterday", icon: iconFlexAllowance },
-  { action: "Dental check-up reimbursed", time: "3 days ago", icon: iconHealthInsurance },
+const allowances = [
+  {
+    title: "Wellbeing Allowance",
+    provider: "Happl Spend",
+    icon: iconFlexAllowance,
+    spent: 450,
+    total: 600,
+    resets: "Resets Jan 2027",
+  },
+  {
+    title: "Learning & Development",
+    provider: "Happl Spend",
+    icon: iconLearning,
+    spent: 800,
+    total: 1000,
+    resets: "Resets Jan 2027",
+  },
+];
+
+const availableBenefits = [
+  {
+    title: "Mental Health Support",
+    subtitle: "Spill · 8 free therapy sessions",
+    icon: iconHealthInsurance,
+    action: "Quick activate",
+  },
+  {
+    title: "Electric Vehicle Scheme",
+    subtitle: "Octopus EV · Save up to 40%",
+    icon: iconCycleToWork,
+    action: "Available",
+  },
+  {
+    title: "Travel Insurance",
+    subtitle: "AXA · Worldwide cover",
+    icon: iconLifeInsurance,
+    action: "Quick activate",
+  },
 ];
 
 export default function BenefitsHome() {
   const navigate = useNavigate();
 
   return (
-    <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1100px]">
+    <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1000px]">
       {/* Greeting */}
       <motion.div variants={fadeUp} className="mb-8">
-        <h1 className="text-3xl font-serif text-foreground">
-          Good morning, Sarah 👋
+        <h1 className="text-3xl font-bold text-foreground">
+          Good morning, Sarah
         </h1>
         <p className="text-muted-foreground mt-1">
-          Here's an overview of your employee benefits at Acme Corp.
+          Here's your benefits overview
         </p>
       </motion.div>
 
-      {/* Quick Stats */}
-      <motion.div variants={fadeUp} className="grid grid-cols-4 gap-4 mb-8">
+      {/* Quick Stats — big cards */}
+      <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-10">
         {quickStats.map((stat) => (
           <motion.div
             key={stat.label}
             whileHover={{ scale: 1.02, y: -2 }}
-            className="happl-card flex items-center gap-4"
+            className="happl-card p-6"
           >
-            <img src={stat.icon} alt={stat.label} className="w-11 h-11 object-contain" />
-            <div>
-              <AnimatedCounter
-                value={stat.value}
-                prefix={stat.prefix}
-                className="text-2xl font-semibold text-foreground"
-              />
-              <p className="text-xs text-muted-foreground">{stat.label}</p>
-            </div>
+            <p className={`text-xs font-semibold tracking-wider mb-2 ${stat.highlight ? "text-happl-warning" : "text-muted-foreground"}`}>
+              {stat.label}
+            </p>
+            <AnimatedCounter
+              value={stat.value}
+              prefix={stat.prefix}
+              className={`text-4xl font-bold ${stat.highlight ? "text-happl-warning" : "text-foreground"}`}
+            />
+            <p className="text-sm text-muted-foreground mt-1">{stat.sub}</p>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Enrollment Banner */}
-      <motion.div
-        variants={fadeUp}
-        whileHover={{ scale: 1.005 }}
-        className="rounded-2xl bg-gradient-to-r from-primary to-happl-teal-light p-6 mb-8 flex items-center justify-between cursor-pointer"
-        onClick={() => navigate("/marketplace")}
-      >
-        <div className="flex items-center gap-4">
-          <img src={iconEnrollment} alt="Enrollment" className="w-12 h-12 object-contain" />
-          <div>
-            <h3 className="text-lg font-semibold text-primary-foreground">
-              Open Enrollment Window
-            </h3>
-            <p className="text-sm text-primary-foreground/70">
-              Explore and activate new benefits — enrollment closes in 14 days
+      {/* Enrollment Window */}
+      <motion.div variants={fadeUp} className="mb-10">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-foreground">Enrollment window open</h2>
+          <button
+            onClick={() => navigate("/marketplace")}
+            className="text-sm font-medium text-foreground flex items-center gap-1 hover:underline"
+          >
+            View all <ArrowRight size={14} />
+          </button>
+        </div>
+        <div className="happl-card-static border-happl-warning/30 bg-happl-warning/5 p-0 overflow-hidden">
+          <div className="px-6 py-3 flex items-center gap-2 border-b border-happl-warning/20">
+            <Clock size={14} className="text-happl-warning" />
+            <p className="text-sm font-medium text-happl-warning">
+              These benefits close for enrollment on 18 April 2026
             </p>
           </div>
+          <div className="divide-y divide-border">
+            {enrollmentItems.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 + i * 0.08 }}
+                whileHover={{ x: 4, backgroundColor: "hsl(40 20% 96%)" }}
+                className="flex items-center justify-between px-6 py-4 cursor-pointer transition-colors"
+                onClick={() => navigate("/benefit/insurance")}
+              >
+                <div className="flex items-center gap-4">
+                  <img src={item.icon} alt={item.title} className="w-12 h-12 object-contain" />
+                  <div>
+                    <h3 className="font-semibold text-foreground">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.provider}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="happl-badge bg-muted text-muted-foreground text-xs flex items-center gap-1">
+                    <Clock size={12} /> {item.daysLeft}d left
+                  </span>
+                  <ArrowRight size={16} className="text-muted-foreground" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <motion.button
-          whileHover={{ x: 4 }}
-          className="flex items-center gap-2 bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold"
-        >
-          Explore Benefits
-          <ArrowRight size={16} />
-        </motion.button>
       </motion.div>
 
-      <div className="grid grid-cols-3 gap-6 mb-8">
-        {/* Featured Benefits */}
-        <div className="col-span-2">
-          <motion.div variants={fadeUp} className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-serif text-foreground">Featured Benefits</h2>
-            <button
-              onClick={() => navigate("/marketplace")}
-              className="text-sm text-accent font-medium flex items-center gap-1 hover:underline"
+      {/* Your Allowances */}
+      <motion.div variants={fadeUp} className="mb-10">
+        <h2 className="text-xl font-bold text-foreground mb-4">Your allowances</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {allowances.map((a) => (
+            <motion.div
+              key={a.title}
+              whileHover={{ scale: 1.01, y: -2 }}
+              className="happl-card cursor-pointer"
+              onClick={() => navigate("/benefit/allowance")}
             >
-              View all <ChevronRight size={14} />
-            </button>
-          </motion.div>
-          <div className="space-y-3">
-            {featuredBenefits.map((b) => (
-              <motion.div
-                key={b.id}
-                variants={fadeUp}
-                whileHover={{ scale: 1.01, x: 4 }}
-                className="happl-card flex items-center gap-4 cursor-pointer"
-                onClick={() =>
-                  navigate(
-                    b.id === "flex-allowance"
-                      ? "/benefit/allowance"
-                      : "/benefit/insurance"
-                  )
-                }
-              >
-                <img src={b.icon} alt={b.title} className="w-12 h-12 object-contain" />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-foreground">{b.title}</h3>
-                    <span className={`happl-badge text-[10px] ${b.tagColor}`}>
-                      {b.tag}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{b.subtitle}</p>
-                </div>
-                <ChevronRight size={18} className="text-muted-foreground" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <motion.div variants={fadeUp}>
-          <h2 className="text-xl font-serif text-foreground mb-4">Recent Activity</h2>
-          <div className="happl-card-static space-y-4">
-            {recentActivity.map((a, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 + i * 0.1 }}
-                className="flex items-start gap-3"
-              >
-                <img src={a.icon} alt="" className="w-8 h-8 object-contain mt-0.5" />
+              <div className="flex items-center gap-3 mb-4">
+                <img src={a.icon} alt={a.title} className="w-12 h-12 object-contain" />
                 <div>
-                  <p className="text-sm font-medium text-foreground">{a.action}</p>
-                  <p className="text-xs text-muted-foreground">{a.time}</p>
+                  <h3 className="font-semibold text-foreground">{a.title}</h3>
+                  <p className="text-sm text-accent">{a.provider}</p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+              </div>
+              <div className="flex items-baseline gap-2 mb-2">
+                <AnimatedCounter value={a.spent} prefix="€" className="text-3xl font-bold text-foreground" />
+                <span className="text-sm text-muted-foreground">of €{a.total.toLocaleString()}</span>
+              </div>
+              <div className="h-2 rounded-full bg-muted overflow-hidden mb-2">
+                <motion.div
+                  className="h-full rounded-full bg-accent"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(a.spent / a.total) * 100}%` }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">{a.resets}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Available to You */}
+      <motion.div variants={fadeUp} className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-foreground">Available to you</h2>
+          <button
+            onClick={() => navigate("/marketplace")}
+            className="text-sm font-medium text-foreground flex items-center gap-1 hover:underline"
+          >
+            Browse all <ArrowRight size={14} />
+          </button>
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {availableBenefits.map((b, i) => (
+            <motion.div
+              key={b.title}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + i * 0.08 }}
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="happl-card cursor-pointer"
+              onClick={() => navigate("/benefit/insurance")}
+            >
+              <img src={b.icon} alt={b.title} className="w-14 h-14 object-contain mb-4" />
+              <h3 className="font-semibold text-foreground">{b.title}</h3>
+              <p className="text-sm text-muted-foreground mb-4">{b.subtitle}</p>
+              <span className={`happl-badge text-xs ${b.action === "Available" ? "bg-muted text-muted-foreground" : "bg-accent/15 text-accent"}`}>
+                {b.action}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
   );
 }

@@ -45,17 +45,17 @@ export default function BenefitInsurance() {
   return (
     <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[900px]">
       <motion.button variants={fadeUp} onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
-        <ArrowLeft size={16} /> Back to Marketplace
+        <ArrowLeft size={16} /> Back
       </motion.button>
 
       {/* Hero card */}
       <motion.div variants={fadeUp} className="rounded-2xl bg-gradient-to-r from-primary to-happl-teal-light p-8 mb-8">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-4">
-            <img src={iconHealthInsurance} alt="Health Insurance" className="w-16 h-16 object-contain" />
+          <div className="flex items-center gap-5">
+            <img src={iconHealthInsurance} alt="Health Insurance" className="w-20 h-20 object-contain" />
             <div>
               <div className="flex items-center gap-3">
-                <h1 className="text-2xl font-serif text-primary-foreground">Health Insurance</h1>
+                <h1 className="text-2xl font-bold text-primary-foreground">Health Insurance</h1>
                 <span className="happl-badge bg-accent/20 text-accent text-xs">Enrolled</span>
               </div>
               <p className="text-primary-foreground/70 mt-1">Comprehensive medical, dental & vision coverage</p>
@@ -63,7 +63,7 @@ export default function BenefitInsurance() {
           </div>
           <div className="text-right">
             <p className="text-sm text-primary-foreground/60">Your cost</p>
-            <p className="text-2xl font-semibold text-accent">€0/mo</p>
+            <p className="text-2xl font-bold text-accent">€0/mo</p>
             <p className="text-xs text-primary-foreground/50">Company paid</p>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function BenefitInsurance() {
       <div className="grid grid-cols-5 gap-6">
         <div className="col-span-3">
           <motion.div variants={fadeUp}>
-            <h2 className="text-xl font-serif text-foreground mb-4">What's Covered</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">What's Covered</h2>
             <div className="happl-card-static space-y-0 divide-y divide-border">
               {coverageItems.map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.06 }} className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0">
@@ -112,7 +112,7 @@ export default function BenefitInsurance() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="mt-8">
-            <h2 className="text-xl font-serif text-foreground mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
             <div className="space-y-2">
               {faqs.map((faq, i) => (
                 <motion.div key={i} className="happl-card-static cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
@@ -135,7 +135,7 @@ export default function BenefitInsurance() {
             <div className="space-y-2">
               <button onClick={() => navigate("/enroll/health-insurance")} className="w-full flex items-center justify-center gap-2 bg-accent text-accent-foreground py-2.5 rounded-lg text-sm font-semibold hover:brightness-95 transition-all">Manage Plan</button>
               <button className="w-full flex items-center justify-center gap-2 border border-border py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-all">
-                <FileText size={14} /> Submit a Claim
+                <FileText size={14} /> View Policy
               </button>
             </div>
           </div>

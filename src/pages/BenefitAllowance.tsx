@@ -21,7 +21,7 @@ const spendingCategories = [
   { label: "Fitness & Gym", icon: "🏋️", spent: 65, color: "bg-accent/15" },
   { label: "Food & Nutrition", icon: "🍽️", spent: 35, color: "bg-happl-warning/15" },
   { label: "Learning", icon: "📚", spent: 20, color: "bg-happl-info/15" },
-  { label: "Equipment", icon: "🖥️", spent: 30, color: "bg-[#A855F7]/15" },
+  { label: "Equipment", icon: "🖥️", spent: 30, color: "bg-muted" },
 ];
 
 const transactions = [
@@ -40,17 +40,17 @@ export default function BenefitAllowance() {
   return (
     <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[900px]">
       <motion.button variants={fadeUp} onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
-        <ArrowLeft size={16} /> Back to Marketplace
+        <ArrowLeft size={16} /> Back
       </motion.button>
 
       {/* Hero */}
       <motion.div variants={fadeUp} className="rounded-2xl bg-gradient-to-r from-[hsl(var(--accent))] to-[hsl(157,70%,40%)] p-8 mb-8">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-4">
-            <img src={iconFlexAllowance} alt="Flex Allowance" className="w-16 h-16 object-contain" />
+          <div className="flex items-center gap-5">
+            <img src={iconFlexAllowance} alt="Flex Allowance" className="w-20 h-20 object-contain" />
             <div>
               <div className="flex items-center gap-3">
-                <h1 className="text-2xl font-serif text-primary">Flex Allowance</h1>
+                <h1 className="text-2xl font-bold text-primary">Flex Allowance</h1>
                 <span className="happl-badge bg-primary/15 text-primary text-xs">Active</span>
               </div>
               <p className="text-primary/70 mt-1">Spend on wellness, fitness, learning & lifestyle</p>
@@ -58,7 +58,7 @@ export default function BenefitAllowance() {
           </div>
           <div className="text-right">
             <p className="text-sm text-primary/60">Available this month</p>
-            <AnimatedCounter value={remaining} prefix="€" className="text-3xl font-semibold text-primary" />
+            <AnimatedCounter value={remaining} prefix="€" className="text-3xl font-bold text-primary" />
             <p className="text-xs text-primary/50">of €150/month</p>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function BenefitAllowance() {
       <div className="grid grid-cols-5 gap-6">
         <div className="col-span-3">
           <motion.div variants={fadeUp}>
-            <h2 className="text-xl font-serif text-foreground mb-4">Spend by Category</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">Spend by Category</h2>
             <div className="grid grid-cols-2 gap-3">
               {spendingCategories.map((cat, i) => (
                 <motion.div key={cat.label} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.08 }} whileHover={{ scale: 1.02 }} className="happl-card flex items-center gap-3 cursor-pointer">
@@ -95,7 +95,7 @@ export default function BenefitAllowance() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="mt-8">
-            <h2 className="text-xl font-serif text-foreground mb-4">Recent Transactions</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">Recent Transactions</h2>
             <div className="happl-card-static divide-y divide-border">
               {transactions.map((tx, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 + i * 0.06 }} className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0">
