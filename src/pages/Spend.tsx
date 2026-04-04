@@ -106,25 +106,36 @@ export default function Spend() {
       {/* Monthly contributions */}
       <motion.div variants={fadeUp}>
         <h2 className="text-xl text-foreground mb-4">Monthly contributions</h2>
-        <div className="happl-card-static">
-          <div className="grid grid-cols-4 gap-4 text-xs font-medium tracking-wider text-muted-foreground border-b border-border pb-3 mb-3">
-            <span>BENEFIT</span>
-            <span>COVERAGE</span>
-            <span>CURRENT</span>
-            <span>MAX</span>
+        <div className="happl-card-static overflow-hidden p-0">
+          <div className="grid grid-cols-5 gap-4 text-xs font-medium tracking-wider text-muted-foreground border-b border-border px-6 py-3 bg-muted/30">
+            <span className="col-span-2">BENEFIT</span>
+            <span className="text-right">COMPANY</span>
+            <span className="text-right">YOU PAY</span>
+            <span className="text-right">TOTAL</span>
           </div>
-          <div className="space-y-3">
-            <div className="grid grid-cols-4 gap-4 text-sm">
-              <span className="text-foreground font-medium">Coverage</span>
-              <span className="text-muted-foreground font-light">€75</span>
-              <span className="font-medium text-foreground">€1,000</span>
-              <span className="text-muted-foreground font-light">€2,000</span>
-            </div>
-            <div className="grid grid-cols-4 gap-4 text-sm">
-              <span className="text-foreground font-medium">SaaS Fee</span>
-              <span className="text-muted-foreground font-light">—</span>
-              <span className="font-medium text-foreground">€1,000</span>
-              <span className="text-muted-foreground font-light">€2,000</span>
+          <div className="divide-y divide-border">
+            {[
+              { name: "Health Insurance", company: 350, you: 0, total: 350 },
+              { name: "Life Insurance", company: 85, you: 0, total: 85 },
+              { name: "Income Protection", company: 0, you: 12, total: 12 },
+              { name: "Wellbeing Allowance", company: 50, you: 0, total: 50 },
+              { name: "Learning & Development", company: 83, you: 0, total: 83 },
+              { name: "Meal Allowance", company: 200, you: 0, total: 200 },
+            ].map((row) => (
+              <div key={row.name} className="grid grid-cols-5 gap-4 text-sm px-6 py-3.5 items-center">
+                <span className="col-span-2 text-foreground font-medium">{row.name}</span>
+                <span className="text-right text-muted-foreground font-light">€{row.company}</span>
+                <span className={`text-right font-light ${row.you > 0 ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+                  {row.you > 0 ? `€${row.you}` : "—"}
+                </span>
+                <span className="text-right text-foreground font-medium">€{row.total}</span>
+              </div>
+            ))}
+            <div className="grid grid-cols-5 gap-4 text-sm px-6 py-3.5 items-center bg-muted/20 font-semibold">
+              <span className="col-span-2 text-foreground">Total monthly</span>
+              <span className="text-right text-accent">€768</span>
+              <span className="text-right text-foreground">€12</span>
+              <span className="text-right text-foreground">€780</span>
             </div>
           </div>
         </div>
