@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Clock, Check } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import happlIcon from "@/assets/happl-icon.png";
+
 
 import iconTotalValue from "@/assets/icons/total-value.png";
 import iconActiveBenefits from "@/assets/icons/active-benefits.png";
