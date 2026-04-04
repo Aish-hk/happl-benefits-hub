@@ -13,6 +13,10 @@ import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
 import iconCycleToWork from "@/assets/icons/cycle-to-work.png";
 import iconLearning from "@/assets/icons/learning.png";
 
+import mentalHealthImg from "@/assets/mental-health-card.jpg";
+import evSchemeImg from "@/assets/ev-scheme-card.jpg";
+import travelInsuranceImg from "@/assets/travel-insurance-card.jpg";
+
 const stagger = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08 } },
@@ -24,8 +28,8 @@ const fadeUp = {
 
 const quickStats = [
   { label: "TOTAL PACKAGE VALUE", value: 15200, icon: iconTotalValue, prefix: "€", sub: "per year", style: "bg-primary text-white" },
-  { label: "ACTIVE BENEFITS", value: 7, icon: iconActiveBenefits, sub: "of 12 total", style: "bg-card border-2 border-primary text-foreground" },
-  { label: "NEEDS ATTENTION", value: 3, icon: iconNeedsAttention, sub: "closing soon", style: "bg-card border-2 border-happl-warning text-foreground" },
+  { label: "ACTIVE BENEFITS", value: 7, icon: iconActiveBenefits, sub: "of 12 total", style: "bg-card border border-primary/40 text-foreground" },
+  { label: "NEEDS ATTENTION", value: 3, icon: iconNeedsAttention, sub: "closing soon", style: "bg-card border border-happl-warning/40 text-foreground" },
 ];
 
 const enrollmentItems = [
@@ -95,21 +99,21 @@ const availableBenefits = [
   {
     title: "Mental Health Support",
     subtitle: "Spill · 8 free therapy sessions",
-    icon: iconHealthInsurance,
+    image: mentalHealthImg,
     tag: "Quick activate",
     tagColor: "bg-accent/15 text-accent",
   },
   {
     title: "Electric Vehicle Scheme",
     subtitle: "Octopus EV · Save up to 40%",
-    icon: iconCycleToWork,
+    image: evSchemeImg,
     tag: "Enrollment open",
     tagColor: "bg-happl-warning/15 text-happl-warning",
   },
   {
     title: "Travel Insurance",
     subtitle: "AXA · Worldwide cover",
-    icon: iconLifeInsurance,
+    image: travelInsuranceImg,
     tag: "Quick activate",
     tagColor: "bg-accent/15 text-accent",
   },
@@ -309,7 +313,7 @@ export default function BenefitsHome() {
         </div>
       </motion.div>
 
-      {/* Available to You */}
+      {/* Available to You — Image cards like Happl reference */}
       <motion.div variants={fadeUp} className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl text-foreground">Available to you</h2>
@@ -328,21 +332,25 @@ export default function BenefitsHome() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.08 }}
               whileHover={{ scale: 1.02, y: -2 }}
-              className="happl-card cursor-pointer"
+              className="rounded-2xl overflow-hidden border border-border bg-card cursor-pointer shadow-sm"
               onClick={() => navigate("/benefit/insurance")}
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className={`happl-badge text-[10px] ${b.tagColor}`}>{b.tag}</span>
+              <div className="relative h-36 overflow-hidden">
+                <img src={b.image} alt={b.title} className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute top-3 left-3">
+                  <span className={`happl-badge text-[10px] ${b.tagColor}`}>{b.tag}</span>
+                </div>
               </div>
-              <img src={b.icon} alt={b.title} className="w-20 h-20 object-contain mb-4" loading="lazy" />
-              <h3 className="font-medium text-foreground">{b.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4 font-light">{b.subtitle}</p>
-              <button
-                onClick={(e) => { e.stopPropagation(); navigate(`/enroll/${b.title.toLowerCase().replace(/ /g, '-')}`); }}
-                className="w-full px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:brightness-110 transition-all"
-              >
-                {b.tag === "Quick activate" ? "Activate Now" : "Enrol"}
-              </button>
+              <div className="p-4">
+                <h3 className="font-medium text-foreground mb-1">{b.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4 font-light">{b.subtitle}</p>
+                <button
+                  onClick={(e) => { e.stopPropagation(); navigate(`/enroll/${b.title.toLowerCase().replace(/ /g, '-')}`); }}
+                  className="w-full px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:brightness-110 transition-all"
+                >
+                  {b.tag === "Quick activate" ? "Activate Now" : "Enrol"}
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>

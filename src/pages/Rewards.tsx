@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, Gift, ArrowRight } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
 import iconCheckCircle from "@/assets/icons/check-circle.png";
@@ -21,15 +23,33 @@ const rewards = [
 ];
 
 const redeemOptions = [
-  { title: "Extra Day Off", points: 500, icon: iconDayOff },
-  { title: "€50 Gift Voucher", points: 300, icon: iconGiftVoucher },
-  { title: "Charity Donation", points: 200, icon: iconCharity },
-  { title: "Team Lunch", points: 400, icon: iconTeamLunch },
+  { title: "Extra Day Off", points: 500, icon: iconDayOff, desc: "Take an additional paid day off" },
+  { title: "€50 Gift Voucher", points: 300, icon: iconGiftVoucher, desc: "Choose from 100+ retailers" },
+  { title: "Charity Donation", points: 200, icon: iconCharity, desc: "Donate to a charity of your choice" },
+  { title: "Team Lunch", points: 400, icon: iconTeamLunch, desc: "Treat your team to lunch" },
 ];
 
+type RedeemStep = "idle" | "confirm" | "success";
+
 export default function Rewards() {
-  const totalPoints = 650;
+  const [totalPoints, setTotalPoints] = useState(650);
   const earnedCount = rewards.filter(r => r.earned).length;
+  const [redeemState, setRedeemState] = useState<{ step: RedeemStep; option: typeof redeemOptions[0] | null }>({ step: "idle", option: null });
+
+  const handleRedeem = (opt: typeof redeemOptions[0]) => {
+    setRedeemState({ step: "confirm", option: opt });
+  };
+
+  const confirmRedeem = () => {
+    if (redeemState.option) {
+      setTotalPoints(prev => prev - redeemState.option!.points);
+      setRedeemState({ step: "success", option: redeemState.option });
+    }
+  };
+
+  const closeRedeem = () => {
+    setRedeemState({ step: "idle", option: null });
+  };
 
   return (
     <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1000px]">
@@ -97,6 +117,7 @@ export default function Rewards() {
                   <p className="text-sm text-muted-foreground font-light">{opt.points} points</p>
                 </div>
                 <button
+                  onClick={() => handleRedeem(opt)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     totalPoints >= opt.points
                       ? "bg-accent text-accent-foreground hover:brightness-95"
@@ -111,6 +132,98 @@ export default function Rewards() {
           </div>
         </motion.div>
       </div>
+
+      {/* Redeem Modal */}
+      <AnimatePresence>
+        {redeemState.step !== "idle" && redeemState.option && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+            onClick={closeRedeem}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-card rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 border border-border"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {redeemState.step === "confirm" && (
+                <div className="text-center">
+                  <img src={redeemState.option.icon} alt={redeemState.option.title} className="w-24 h-24 mx-auto mb-4 object-contain" />
+                  <h3 className="text-xl font-medium text-foreground mb-2">Redeem {redeemState.option.title}?</h3>
+                  <p className="text-sm text-muted-foreground font-light mb-2">{redeemState.option.desc}</p>
+                  <div className="flex items-center justify-center gap-2 mb-6">
+                    <span className="text-2xl font-semibold text-accent">{redeemState.option.points}</span>
+                    <span className="text-sm text-muted-foreground font-light">points will be deducted</span>
+                  </div>
+                  <div className="rounded-xl bg-muted/50 p-4 mb-6">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground font-light">Current balance</span>
+                      <span className="font-medium text-foreground">{totalPoints} pts</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm mt-2">
+                      <span className="text-muted-foreground font-light">After redemption</span>
+                      <span className="font-medium text-accent">{totalPoints - redeemState.option.points} pts</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={closeRedeem}
+                      className="flex-1 px-4 py-3 rounded-xl border border-border text-sm font-medium text-foreground hover:bg-muted transition-all"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={confirmRedeem}
+                      className="flex-1 px-4 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:brightness-95 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Gift size={16} /> Confirm Redeem
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {redeemState.step === "success" && (
+                <div className="text-center">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                    className="w-20 h-20 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-4"
+                  >
+                    <Check size={40} className="text-accent" />
+                  </motion.div>
+                  <h3 className="text-xl font-medium text-foreground mb-2">Redeemed!</h3>
+                  <p className="text-sm text-muted-foreground font-light mb-2">
+                    You've successfully redeemed <span className="font-medium text-foreground">{redeemState.option.title}</span>
+                  </p>
+                  <p className="text-sm text-muted-foreground font-light mb-6">
+                    {redeemState.option.points} points deducted · Remaining balance: <span className="font-medium text-accent">{totalPoints} pts</span>
+                  </p>
+                  <div className="rounded-xl bg-accent/10 border border-accent/20 p-4 mb-6">
+                    <div className="flex items-center gap-3">
+                      <img src={redeemState.option.icon} alt="" className="w-12 h-12 object-contain" />
+                      <div className="text-left">
+                        <p className="text-sm font-medium text-foreground">{redeemState.option.title}</p>
+                        <p className="text-xs text-muted-foreground font-light">{redeemState.option.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={closeRedeem}
+                    className="w-full px-4 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                  >
+                    Done <ArrowRight size={14} />
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
