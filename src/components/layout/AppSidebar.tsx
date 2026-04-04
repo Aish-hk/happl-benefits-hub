@@ -51,75 +51,67 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         )}
       </div>
 
-      {collapsed && (
-        <button
-          onClick={onToggle}
-          className="mx-auto mb-2 p-1.5 rounded-lg hover:bg-sidebar-accent transition-colors"
-        >
-          <ChevronRight size={16} className="text-sidebar-foreground/60" />
-        </button>
-      )}
-
-      {/* Main Nav — text only, no icons */}
-      <nav className="flex-1 px-2">
-        <ul className="space-y-1">
-          {navItems.map((item, i) => {
-            const isActive =
-              location.pathname === item.path ||
-              (item.path !== "/" && location.pathname.startsWith(item.path));
-            return (
-              <motion.li
-                key={item.path}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <button
-                  onClick={() => navigate(item.path)}
-                  title={collapsed ? item.label : undefined}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 ${
-                    collapsed ? "justify-center" : ""
-                  } ${
-                    isActive
-                      ? "bg-sidebar-accent text-accent font-medium"
-                      : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 font-light"
-                  }`}
+      {/* Main Nav — hidden when collapsed, text only when expanded */}
+      {!collapsed ? (
+        <nav className="flex-1 px-2">
+          <ul className="space-y-1">
+            {navItems.map((item, i) => {
+              const isActive =
+                location.pathname === item.path ||
+                (item.path !== "/" && location.pathname.startsWith(item.path));
+              return (
+                <motion.li
+                  key={item.path}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
                 >
-                  {collapsed ? item.label.charAt(0) : item.label}
-                  {!collapsed && isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="ml-auto w-1.5 h-1.5 rounded-full bg-accent"
-                    />
-                  )}
-                </button>
-              </motion.li>
-            );
-          })}
-        </ul>
-      </nav>
+                  <button
+                    onClick={() => navigate(item.path)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 ${
+                      isActive
+                        ? "bg-sidebar-accent text-accent font-medium"
+                        : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 font-light"
+                    }`}
+                  >
+                    {item.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="ml-auto w-1.5 h-1.5 rounded-full bg-accent"
+                      />
+                    )}
+                  </button>
+                </motion.li>
+              );
+            })}
+          </ul>
+        </nav>
+      ) : (
+        <div className="flex-1" />
+      )}
 
       {/* Bottom */}
       <div className="px-2 pb-4">
-        <div className="border-t border-sidebar-border pt-3 space-y-1">
-          {bottomItems.map((item) => (
+        {!collapsed && (
+          <div className="border-t border-sidebar-border pt-3 space-y-1">
+            {bottomItems.map((item) => (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200"
+              >
+                {item.label}
+              </button>
+            ))}
             <button
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              title={collapsed ? item.label : undefined}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200"
             >
-              {collapsed ? item.label.charAt(0) : item.label}
+              <LogOut size={16} />
+              Logout
             </button>
-          ))}
-          <button
-            title={collapsed ? "Logout" : undefined}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
-          >
-            <LogOut size={16} />
-            {!collapsed && "Logout"}
-          </button>
-        </div>
+          </div>
+        )}
 
         {!collapsed && (
           <div className="mt-4 px-3 flex items-center gap-3">
@@ -137,10 +129,10 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
           </div>
         )}
         {collapsed && (
-          <div className="mt-4 flex justify-center">
-            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-medium">
+          <div className="flex justify-center">
+            <button onClick={onToggle} className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-medium">
               SM
-            </div>
+            </button>
           </div>
         )}
       </div>
