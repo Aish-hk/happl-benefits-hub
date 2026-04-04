@@ -27,7 +27,7 @@ const fadeUp = {
 };
 
 const quickStats = [
-  { label: "TOTAL PACKAGE VALUE", value: 15200, icon: iconTotalValue, prefix: "€", sub: "per year", style: "bg-primary text-white" },
+  { label: "TOTAL CONTRIBUTION", value: 250750, icon: iconTotalValue, prefix: "€", sub: "", style: "bg-primary text-white", breakdown: { company: 238200, personal: 12550 } },
   { label: "ACTIVE BENEFITS", value: 7, icon: iconActiveBenefits, sub: "of 12 total", style: "bg-card border border-primary/40 text-foreground" },
   { label: "NEEDS ATTENTION", value: 3, icon: iconNeedsAttention, sub: "closing soon", style: "bg-card border border-happl-warning/40 text-foreground" },
 ];
