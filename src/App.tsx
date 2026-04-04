@@ -3,8 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import AppLayout from "./components/layout/AppLayout";
+import BenefitsHome from "./pages/BenefitsHome";
+import Marketplace from "./pages/Marketplace";
+import BenefitInsurance from "./pages/BenefitInsurance";
+import BenefitAllowance from "./pages/BenefitAllowance";
+import EnrollmentFlow from "./pages/EnrollmentFlow";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -15,8 +20,13 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<BenefitsHome />} />
+            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/benefit/insurance" element={<BenefitInsurance />} />
+            <Route path="/benefit/allowance" element={<BenefitAllowance />} />
+            <Route path="/enroll/:benefitId" element={<EnrollmentFlow />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
