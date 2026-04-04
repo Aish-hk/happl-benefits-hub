@@ -9,7 +9,11 @@ import {
   Settings,
   LogOut,
   HelpCircle,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import happlLogo from "@/assets/happl-logo.png";
+import happlIcon from "@/assets/happl-icon.png";
 
 const navItems = [
   { label: "Home", icon: Home, path: "/" },
@@ -24,33 +28,62 @@ const bottomItems = [
   { label: "Settings", icon: Settings, path: "/settings" },
 ];
 
-export default function AppSidebar() {
+interface AppSidebarProps {
+  collapsed: boolean;
+  onToggle: () => void;
+}
+
+export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-[240px] bg-primary flex flex-col z-50">
+    <motion.aside
+      initial={false}
+      animate={{ width: collapsed ? 72 : 240 }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      className="fixed left-0 top-0 h-screen bg-primary flex flex-col z-50 overflow-hidden"
+    >
       {/* Logo */}
-      <div className="px-6 py-8">
+      <div className={`px-4 py-6 flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 overflow-hidden"
         >
-          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-            <span className="text-accent-foreground font-bold text-sm">H</span>
-          </div>
-          <span className="text-primary-foreground font-semibold text-lg tracking-tight">
-            Happl
-          </span>
+          {collapsed ? (
+            <img src={happlIcon} alt="Happl" className="w-10 h-10 rounded-lg object-cover" />
+          ) : (
+            <img src={happlLogo} alt="Happl" className="h-8 object-contain" />
+          )}
         </motion.div>
+        {!collapsed && (
+          <button
+            onClick={onToggle}
+            className="p-1.5 rounded-lg hover:bg-sidebar-accent transition-colors"
+          >
+            <ChevronLeft size={16} className="text-sidebar-foreground/60" />
+          </button>
+        )}
       </div>
 
+      {/* Collapse button when collapsed */}
+      {collapsed && (
+        <button
+          onClick={onToggle}
+          className="mx-auto mb-2 p-1.5 rounded-lg hover:bg-sidebar-accent transition-colors"
+        >
+          <ChevronRight size={16} className="text-sidebar-foreground/60" />
+        </button>
+      )}
+
       {/* Main Nav */}
-      <nav className="flex-1 px-3">
-        <p className="px-3 mb-2 text-xs font-medium uppercase tracking-wider text-sidebar-accent-foreground/50">
-          Main
-        </p>
+      <nav className="flex-1 px-2">
+        {!collapsed && (
+          <p className="px-3 mb-2 text-xs font-medium uppercase tracking-wider text-sidebar-accent-foreground/50">
+            Main
+          </p>
+        )}
         <ul className="space-y-1">
           {navItems.map((item, i) => {
             const isActive =
@@ -65,15 +98,18 @@ export default function AppSidebar() {
               >
                 <button
                   onClick={() => navigate(item.path)}
+                  title={collapsed ? item.label : undefined}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    collapsed ? "justify-center" : ""
+                  } ${
                     isActive
                       ? "bg-sidebar-accent text-accent"
                       : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
                   }`}
                 >
                   <item.icon size={18} />
-                  {item.label}
-                  {isActive && (
+                  {!collapsed && item.label}
+                  {!collapsed && isActive && (
                     <motion.div
                       layoutId="activeIndicator"
                       className="ml-auto w-1.5 h-1.5 rounded-full bg-accent"
@@ -87,39 +123,52 @@ export default function AppSidebar() {
       </nav>
 
       {/* Bottom */}
-      <div className="px-3 pb-4">
+      <div className="px-2 pb-4">
         <div className="border-t border-sidebar-border pt-3 space-y-1">
           {bottomItems.map((item) => (
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200"
+              title={collapsed ? item.label : undefined}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
             >
               <item.icon size={18} />
-              {item.label}
+              {!collapsed && item.label}
             </button>
           ))}
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200">
+          <button
+            title={collapsed ? "Logout" : undefined}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
+          >
             <LogOut size={18} />
-            Logout
+            {!collapsed && "Logout"}
           </button>
         </div>
 
         {/* User */}
-        <div className="mt-4 px-3 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
-            SS
+        {!collapsed && (
+          <div className="mt-4 px-3 flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
+              SS
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-sidebar-foreground truncate">
+                Sarah Smith
+              </p>
+              <p className="text-xs text-sidebar-foreground/50 truncate">
+                Acme Corp
+              </p>
+            </div>
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-sidebar-foreground truncate">
-              Sarah Smith
-            </p>
-            <p className="text-xs text-sidebar-foreground/50 truncate">
-              Acme Corp
-            </p>
+        )}
+        {collapsed && (
+          <div className="mt-4 flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
+              SS
+            </div>
           </div>
-        </div>
+        )}
       </div>
-    </aside>
+    </motion.aside>
   );
 }
