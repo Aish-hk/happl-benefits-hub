@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Search, ChevronRight } from "lucide-react";
 
+import marketplaceHero from "@/assets/marketplace-hero.jpg";
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
 import iconLifeInsurance from "@/assets/icons/life-insurance.png";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
@@ -56,6 +57,23 @@ export default function Marketplace() {
         <p className="text-muted-foreground mt-1 font-light">Explore, compare, and activate your employee benefits</p>
       </motion.div>
 
+      {/* Hero Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.05 }}
+        className="relative rounded-2xl overflow-hidden mb-8 h-[200px]"
+      >
+        <img src={marketplaceHero} alt="Benefits Marketplace" className="w-full h-full object-cover" width={1200} height={512} />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/40 flex items-center px-10">
+          <div>
+            <p className="text-white/70 text-xs font-medium tracking-wider mb-1">NEW PARTNERSHIP</p>
+            <h2 className="text-2xl text-white font-medium mb-2">Explore your full benefits package</h2>
+            <p className="text-white/80 text-sm font-light max-w-md">Browse, compare, and activate benefits tailored to your needs. New options added regularly.</p>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Search + Underline Tabs */}
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-8">
         <div className="relative max-w-[320px] mb-6">
@@ -68,7 +86,7 @@ export default function Marketplace() {
             className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-card border border-border text-sm font-light focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           />
         </div>
-        {/* Underline tabs like reference */}
+        {/* Underline tabs */}
         <div className="flex items-center gap-0 border-b border-border">
           {categories.map((cat) => (
             <button
