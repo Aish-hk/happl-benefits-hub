@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Search, SlidersHorizontal, ChevronRight } from "lucide-react";
+import { Search, ChevronRight } from "lucide-react";
 
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
 import iconLifeInsurance from "@/assets/icons/life-insurance.png";
@@ -56,43 +56,42 @@ export default function Marketplace() {
         <p className="text-muted-foreground mt-1 font-light">Explore, compare, and activate your employee benefits</p>
       </motion.div>
 
-      {/* Search + Tabs */}
-      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-        <div className="relative flex-1 max-w-[320px]">
+      {/* Search + Bordered Tabs (Compliance Hub style) */}
+      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-8">
+        <div className="relative max-w-[320px] mb-5">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search benefits..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-card border border-border text-sm font-light focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-card border border-border text-sm font-light focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           />
         </div>
-        <div className="flex items-center gap-1 bg-card border border-border rounded-lg p-1">
+        {/* Bordered pill tabs like Compliance Hub */}
+        <div className="flex items-center gap-2">
           {categories.map((cat) => (
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
-              className={`px-4 py-1.5 rounded-md text-sm transition-all duration-200 ${
+              className={`px-5 py-2 rounded-full text-sm border transition-all duration-200 ${
                 activeCategory === cat.value
-                  ? "bg-primary text-primary-foreground font-medium"
-                  : "text-muted-foreground hover:text-foreground font-light"
+                  ? "bg-primary text-primary-foreground border-primary font-medium"
+                  : "bg-transparent text-muted-foreground border-border hover:text-foreground hover:border-foreground/30 font-light"
               }`}
             >
               {cat.label}
             </button>
           ))}
         </div>
-        <button className="p-2.5 rounded-lg border border-border bg-card hover:bg-secondary transition-colors">
-          <SlidersHorizontal size={16} className="text-muted-foreground" />
-        </button>
       </motion.div>
 
-      {/* Benefits Grid */}
+      {/* Benefits Grid — card style with Switch Provider / Opt-in */}
       <motion.div layout className="grid grid-cols-2 gap-4">
         <AnimatePresence mode="popLayout">
           {filtered.map((b, i) => {
             const sc = statusConfig[b.status];
+            const isEnrollable = b.status === "available" || b.status === "enrollment";
             return (
               <motion.div
                 key={b.id}
@@ -115,9 +114,26 @@ export default function Marketplace() {
                     <p className="text-sm text-muted-foreground mb-3 line-clamp-2 font-light">{b.desc}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-foreground/80">{b.contribution}</span>
-                      <motion.span className="text-xs font-medium text-accent flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        View details <ChevronRight size={12} />
-                      </motion.span>
+                      {isEnrollable ? (
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); navigate("/benefit/insurance"); }}
+                            className="px-3 py-1.5 rounded-lg border border-border text-[11px] font-medium text-foreground hover:bg-secondary transition-all"
+                          >
+                            Switch Provider
+                          </button>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); navigate(`/enroll/${b.id}`); }}
+                            className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-[11px] font-medium hover:brightness-110 transition-all"
+                          >
+                            Opt-in
+                          </button>
+                        </div>
+                      ) : (
+                        <motion.span className="text-xs font-medium text-accent flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          View details <ChevronRight size={12} />
+                        </motion.span>
+                      )}
                     </div>
                   </div>
                 </div>
