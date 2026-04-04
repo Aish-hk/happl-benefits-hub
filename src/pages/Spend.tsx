@@ -35,9 +35,19 @@ export default function Spend() {
       {/* Summary cards */}
       <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-10">
         <div className="happl-card p-6">
-          <p className="text-xs font-medium tracking-wider text-muted-foreground mb-2">TOTAL CONTRIBUTION</p>
+          <p className="text-xs font-medium tracking-wider text-muted-foreground mb-2">TOTAL BENEFITS VALUE</p>
           <AnimatedCounter value={250750} prefix="€" className="text-3xl font-semibold text-foreground" />
-          <p className="text-sm text-muted-foreground mt-1 font-light">Company + personal</p>
+          <div className="flex items-center gap-4 mt-3">
+            <div>
+              <p className="text-[10px] text-muted-foreground font-light">Company</p>
+              <p className="text-sm font-medium text-foreground">€238,200</p>
+            </div>
+            <div className="w-px h-6 bg-border" />
+            <div>
+              <p className="text-[10px] text-muted-foreground font-light">Personal</p>
+              <p className="text-sm font-medium text-foreground">€12,550</p>
+            </div>
+          </div>
         </div>
         <div className="happl-card p-6">
           <p className="text-xs font-medium tracking-wider text-muted-foreground mb-2">MONTHLY COST</p>
