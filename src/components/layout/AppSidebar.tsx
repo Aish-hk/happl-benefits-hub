@@ -1,29 +1,19 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  Home,
-  ShoppingBag,
-  CreditCard,
-  Gift,
-  Settings,
-  LogOut,
-  HelpCircle,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 import happlLogo from "@/assets/happl-logo.png";
 import happlIcon from "@/assets/happl-icon.png";
 
 const navItems = [
-  { label: "Home", icon: Home, path: "/" },
-  { label: "Benefits", icon: ShoppingBag, path: "/marketplace" },
-  { label: "Spend", icon: CreditCard, path: "/spend" },
-  { label: "Rewards", icon: Gift, path: "/rewards" },
+  { label: "Home", path: "/" },
+  { label: "Benefits", path: "/marketplace" },
+  { label: "Spend", path: "/spend" },
+  { label: "Rewards", path: "/rewards" },
 ];
 
 const bottomItems = [
-  { label: "Help", icon: HelpCircle, path: "/help" },
-  { label: "Settings", icon: Settings, path: "/settings" },
+  { label: "Help", path: "/help" },
+  { label: "Settings", path: "/settings" },
 ];
 
 interface AppSidebarProps {
@@ -70,7 +60,7 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         </button>
       )}
 
-      {/* Main Nav */}
+      {/* Main Nav — text only, no icons */}
       <nav className="flex-1 px-2">
         <ul className="space-y-1">
           {navItems.map((item, i) => {
@@ -87,16 +77,15 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
                 <button
                   onClick={() => navigate(item.path)}
                   title={collapsed ? item.label : undefined}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 ${
                     collapsed ? "justify-center" : ""
                   } ${
                     isActive
-                      ? "bg-sidebar-accent text-accent"
-                      : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
+                      ? "bg-sidebar-accent text-accent font-medium"
+                      : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 font-light"
                   }`}
                 >
-                  <item.icon size={18} />
-                  {!collapsed && item.label}
+                  {collapsed ? item.label.charAt(0) : item.label}
                   {!collapsed && isActive && (
                     <motion.div
                       layoutId="activeIndicator"
@@ -118,31 +107,30 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
               key={item.path}
               onClick={() => navigate(item.path)}
               title={collapsed ? item.label : undefined}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
             >
-              <item.icon size={18} />
-              {!collapsed && item.label}
+              {collapsed ? item.label.charAt(0) : item.label}
             </button>
           ))}
           <button
             title={collapsed ? "Logout" : undefined}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
           >
-            <LogOut size={18} />
+            <LogOut size={16} />
             {!collapsed && "Logout"}
           </button>
         </div>
 
         {!collapsed && (
           <div className="mt-4 px-3 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
+            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-medium">
               SM
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-sidebar-foreground truncate">
                 Sarah Mitchell
               </p>
-              <p className="text-xs text-sidebar-foreground/50 truncate">
+              <p className="text-xs text-sidebar-foreground/50 truncate font-light">
                 Acme Corp
               </p>
             </div>
@@ -150,7 +138,7 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         )}
         {collapsed && (
           <div className="mt-4 flex justify-center">
-            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-semibold">
+            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-medium">
               SM
             </div>
           </div>
