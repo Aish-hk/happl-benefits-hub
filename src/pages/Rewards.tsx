@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
-import { Gift, Star, Trophy, Zap, ChevronRight } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-import iconTrendingUp from "@/assets/icons/trending-up.png";
 import iconCheckCircle from "@/assets/icons/check-circle.png";
+import iconTrendingUp from "@/assets/icons/trending-up.png";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
+import iconDayOff from "@/assets/icons/day-off.png";
+import iconGiftVoucher from "@/assets/icons/gift-voucher.png";
+import iconCharity from "@/assets/icons/charity.png";
+import iconTeamLunch from "@/assets/icons/team-lunch.png";
 
 const stagger = {
   hidden: {},
@@ -54,10 +57,10 @@ const rewards = [
 ];
 
 const redeemOptions = [
-  { title: "Extra Day Off", points: 500, icon: "🏖️" },
-  { title: "€50 Gift Voucher", points: 300, icon: "🎁" },
-  { title: "Charity Donation", points: 200, icon: "💚" },
-  { title: "Team Lunch", points: 400, icon: "🍕" },
+  { title: "Extra Day Off", points: 500, icon: iconDayOff },
+  { title: "€50 Gift Voucher", points: 300, icon: iconGiftVoucher },
+  { title: "Charity Donation", points: 200, icon: iconCharity },
+  { title: "Team Lunch", points: 400, icon: iconTeamLunch },
 ];
 
 export default function Rewards() {
@@ -107,7 +110,7 @@ export default function Rewards() {
                   transition={{ delay: 0.15 + i * 0.06 }}
                   className={`happl-card flex items-center gap-4 ${!r.earned ? "opacity-50" : ""}`}
                 >
-                  <img src={r.icon} alt={r.title} className="w-14 h-14 object-contain" />
+                  <img src={r.icon} alt={r.title} className="w-14 h-14 object-contain" loading="lazy" />
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold text-foreground">{r.title}</h3>
@@ -131,15 +134,13 @@ export default function Rewards() {
         <motion.div variants={fadeUp} className="col-span-2">
           <h2 className="text-xl font-bold text-foreground mb-4">Redeem points</h2>
           <div className="space-y-3">
-            {redeemOptions.map((opt, i) => (
+            {redeemOptions.map((opt) => (
               <motion.div
                 key={opt.title}
                 whileHover={{ scale: 1.02 }}
                 className="happl-card cursor-pointer flex items-center gap-4"
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-2xl">
-                  {opt.icon}
-                </div>
+                <img src={opt.icon} alt={opt.title} className="w-14 h-14 object-contain" loading="lazy" />
                 <div className="flex-1">
                   <h3 className="font-semibold text-foreground">{opt.title}</h3>
                   <p className="text-sm text-muted-foreground">{opt.points} points</p>

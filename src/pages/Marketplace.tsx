@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {
-  Search,
-  SlidersHorizontal,
-  ChevronRight,
-  Check,
-} from "lucide-react";
+import { Search, SlidersHorizontal, ChevronRight, Check } from "lucide-react";
 
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
 import iconLifeInsurance from "@/assets/icons/life-insurance.png";
@@ -131,11 +126,12 @@ export default function Marketplace() {
         </p>
       </motion.div>
 
+      {/* Search + Tabs */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="flex items-center gap-4 mb-6"
+        className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6"
       >
         <div className="relative flex-1 max-w-[320px]">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -167,6 +163,7 @@ export default function Marketplace() {
         </button>
       </motion.div>
 
+      {/* Benefits Grid */}
       <motion.div layout className="grid grid-cols-2 gap-4">
         <AnimatePresence mode="popLayout">
           {filtered.map((b, i) => {
@@ -193,7 +190,7 @@ export default function Marketplace() {
                   <img
                     src={b.icon}
                     alt={b.title}
-                    className="w-14 h-14 object-contain shrink-0"
+                    className="w-16 h-16 object-contain shrink-0"
                     loading="lazy"
                   />
                   <div className="flex-1 min-w-0">

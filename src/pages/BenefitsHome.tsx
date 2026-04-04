@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronRight, Clock } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-import iconCheckCircle from "@/assets/icons/check-circle.png";
-import iconClock from "@/assets/icons/clock.png";
-import iconLifeInsurance from "@/assets/icons/life-insurance.png";
-import iconTrendingUp from "@/assets/icons/trending-up.png";
+import iconTotalValue from "@/assets/icons/total-value.png";
+import iconActiveBenefits from "@/assets/icons/active-benefits.png";
+import iconNeedsAttention from "@/assets/icons/needs-attention.png";
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
+import iconLifeInsurance from "@/assets/icons/life-insurance.png";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
-import iconEnrollment from "@/assets/icons/enrollment.png";
 import iconCycleToWork from "@/assets/icons/cycle-to-work.png";
 import iconLearning from "@/assets/icons/learning.png";
 
@@ -23,9 +22,9 @@ const fadeUp = {
 };
 
 const quickStats = [
-  { label: "TOTAL PACKAGE VALUE", value: 15200, icon: iconTrendingUp, prefix: "€", suffix: "", sub: "per year", isNumber: true },
-  { label: "ACTIVE BENEFITS", value: 7, icon: iconCheckCircle, sub: "of 12 total", isNumber: true },
-  { label: "NEEDS ATTENTION", value: 3, icon: iconClock, sub: "closing soon", isNumber: true, highlight: true },
+  { label: "TOTAL PACKAGE VALUE", value: 15200, icon: iconTotalValue, prefix: "€", sub: "per year", bg: "bg-primary" },
+  { label: "ACTIVE BENEFITS", value: 7, icon: iconActiveBenefits, sub: "of 12 total", bg: "bg-accent" },
+  { label: "NEEDS ATTENTION", value: 3, icon: iconNeedsAttention, sub: "closing soon", bg: "bg-happl-warning", highlight: true },
 ];
 
 const enrollmentItems = [
@@ -96,31 +95,35 @@ export default function BenefitsHome() {
     <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1000px]">
       {/* Greeting */}
       <motion.div variants={fadeUp} className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">
-          Good morning, Sarah
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          Here's your benefits overview
-        </p>
+        <h1 className="text-3xl font-bold text-foreground">Good morning, Sarah</h1>
+        <p className="text-muted-foreground mt-1">Here's your benefits overview</p>
       </motion.div>
 
-      {/* Quick Stats — big cards */}
+      {/* Quick Stats — big cards with oversized 3D icons */}
       <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-10">
         {quickStats.map((stat) => (
           <motion.div
             key={stat.label}
             whileHover={{ scale: 1.02, y: -2 }}
-            className="happl-card p-6"
+            className={`relative rounded-2xl p-6 pt-14 overflow-visible ${stat.bg} text-white shadow-lg`}
           >
-            <p className={`text-xs font-semibold tracking-wider mb-2 ${stat.highlight ? "text-happl-warning" : "text-muted-foreground"}`}>
-              {stat.label}
-            </p>
+            {/* Oversized 3D icon breaking out of card */}
+            <motion.img
+              src={stat.icon}
+              alt={stat.label}
+              className="absolute -top-8 right-3 w-28 h-28 object-contain drop-shadow-xl pointer-events-none"
+              initial={{ y: 20, opacity: 0, rotate: -5 }}
+              animate={{ y: 0, opacity: 1, rotate: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              loading="lazy"
+            />
+            <p className="text-xs font-semibold tracking-wider text-white/80 mb-2">{stat.label}</p>
             <AnimatedCounter
               value={stat.value}
               prefix={stat.prefix}
-              className={`text-4xl font-bold ${stat.highlight ? "text-happl-warning" : "text-foreground"}`}
+              className="text-4xl font-bold text-white"
             />
-            <p className="text-sm text-muted-foreground mt-1">{stat.sub}</p>
+            <p className="text-sm text-white/70 mt-1">{stat.sub}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -155,7 +158,7 @@ export default function BenefitsHome() {
                 onClick={() => navigate("/benefit/insurance")}
               >
                 <div className="flex items-center gap-4">
-                  <img src={item.icon} alt={item.title} className="w-12 h-12 object-contain" />
+                  <img src={item.icon} alt={item.title} className="w-14 h-14 object-contain" loading="lazy" />
                   <div>
                     <h3 className="font-semibold text-foreground">{item.title}</h3>
                     <p className="text-sm text-muted-foreground">{item.provider}</p>
@@ -185,7 +188,7 @@ export default function BenefitsHome() {
               onClick={() => navigate("/benefit/allowance")}
             >
               <div className="flex items-center gap-3 mb-4">
-                <img src={a.icon} alt={a.title} className="w-12 h-12 object-contain" />
+                <img src={a.icon} alt={a.title} className="w-14 h-14 object-contain" loading="lazy" />
                 <div>
                   <h3 className="font-semibold text-foreground">{a.title}</h3>
                   <p className="text-sm text-accent">{a.provider}</p>
@@ -231,7 +234,7 @@ export default function BenefitsHome() {
               className="happl-card cursor-pointer"
               onClick={() => navigate("/benefit/insurance")}
             >
-              <img src={b.icon} alt={b.title} className="w-14 h-14 object-contain mb-4" />
+              <img src={b.icon} alt={b.title} className="w-16 h-16 object-contain mb-4" loading="lazy" />
               <h3 className="font-semibold text-foreground">{b.title}</h3>
               <p className="text-sm text-muted-foreground mb-4">{b.subtitle}</p>
               <span className={`happl-badge text-xs ${b.action === "Available" ? "bg-muted text-muted-foreground" : "bg-accent/15 text-accent"}`}>
