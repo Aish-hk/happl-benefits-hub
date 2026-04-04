@@ -95,8 +95,8 @@ export default function BenefitsHome() {
     <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1000px]">
       {/* Greeting */}
       <motion.div variants={fadeUp} className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">Good morning, Sarah</h1>
-        <p className="text-muted-foreground mt-1">Here's your benefits overview</p>
+        <h1 className="text-3xl text-foreground">Good morning, Sarah</h1>
+        <p className="text-muted-foreground mt-1 font-light">Here's your benefits overview</p>
       </motion.div>
 
       {/* Quick Stats — big cards with oversized 3D icons */}
@@ -105,25 +105,25 @@ export default function BenefitsHome() {
           <motion.div
             key={stat.label}
             whileHover={{ scale: 1.02, y: -2 }}
-            className={`relative rounded-2xl p-6 pt-14 overflow-visible ${stat.bg} text-white shadow-lg`}
+            className={`relative rounded-2xl p-6 pt-16 overflow-visible ${stat.bg} text-white shadow-lg`}
           >
             {/* Oversized 3D icon breaking out of card */}
             <motion.img
               src={stat.icon}
               alt={stat.label}
-              className="absolute -top-8 right-3 w-28 h-28 object-contain drop-shadow-xl pointer-events-none"
+              className="absolute -top-10 right-2 w-36 h-36 object-contain drop-shadow-xl pointer-events-none"
               initial={{ y: 20, opacity: 0, rotate: -5 }}
               animate={{ y: 0, opacity: 1, rotate: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               loading="lazy"
             />
-            <p className="text-xs font-semibold tracking-wider text-white/80 mb-2">{stat.label}</p>
+            <p className="text-xs font-medium tracking-wider text-white/80 mb-2">{stat.label}</p>
             <AnimatedCounter
               value={stat.value}
               prefix={stat.prefix}
-              className="text-4xl font-bold text-white"
+              className="text-4xl font-semibold text-white"
             />
-            <p className="text-sm text-white/70 mt-1">{stat.sub}</p>
+            <p className="text-sm text-white/70 mt-1 font-light">{stat.sub}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -131,7 +131,7 @@ export default function BenefitsHome() {
       {/* Enrollment Window */}
       <motion.div variants={fadeUp} className="mb-10">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-foreground">Enrollment window open</h2>
+          <h2 className="text-xl text-foreground">Enrollment window open</h2>
           <button
             onClick={() => navigate("/marketplace")}
             className="text-sm font-medium text-foreground flex items-center gap-1 hover:underline"
@@ -158,10 +158,10 @@ export default function BenefitsHome() {
                 onClick={() => navigate("/benefit/insurance")}
               >
                 <div className="flex items-center gap-4">
-                  <img src={item.icon} alt={item.title} className="w-14 h-14 object-contain" loading="lazy" />
+                  <img src={item.icon} alt={item.title} className="w-18 h-18 object-contain" loading="lazy" />
                   <div>
-                    <h3 className="font-semibold text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.provider}</p>
+                    <h3 className="font-medium text-foreground">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground font-light">{item.provider}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -178,7 +178,7 @@ export default function BenefitsHome() {
 
       {/* Your Allowances */}
       <motion.div variants={fadeUp} className="mb-10">
-        <h2 className="text-xl font-bold text-foreground mb-4">Your allowances</h2>
+        <h2 className="text-xl text-foreground mb-4">Your allowances</h2>
         <div className="grid grid-cols-2 gap-4">
           {allowances.map((a) => (
             <motion.div
@@ -188,15 +188,15 @@ export default function BenefitsHome() {
               onClick={() => navigate("/benefit/allowance")}
             >
               <div className="flex items-center gap-3 mb-4">
-                <img src={a.icon} alt={a.title} className="w-14 h-14 object-contain" loading="lazy" />
+                <img src={a.icon} alt={a.title} className="w-18 h-18 object-contain" loading="lazy" />
                 <div>
-                  <h3 className="font-semibold text-foreground">{a.title}</h3>
-                  <p className="text-sm text-accent">{a.provider}</p>
+                  <h3 className="font-medium text-foreground">{a.title}</h3>
+                  <p className="text-sm text-accent font-light">{a.provider}</p>
                 </div>
               </div>
               <div className="flex items-baseline gap-2 mb-2">
-                <AnimatedCounter value={a.spent} prefix="€" className="text-3xl font-bold text-foreground" />
-                <span className="text-sm text-muted-foreground">of €{a.total.toLocaleString()}</span>
+                <AnimatedCounter value={a.spent} prefix="€" className="text-3xl font-semibold text-foreground" />
+                <span className="text-sm text-muted-foreground font-light">of €{a.total.toLocaleString()}</span>
               </div>
               <div className="h-2 rounded-full bg-muted overflow-hidden mb-2">
                 <motion.div
@@ -206,7 +206,7 @@ export default function BenefitsHome() {
                   transition={{ duration: 0.8, delay: 0.3 }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground">{a.resets}</p>
+              <p className="text-xs text-muted-foreground font-light">{a.resets}</p>
             </motion.div>
           ))}
         </div>
@@ -215,7 +215,7 @@ export default function BenefitsHome() {
       {/* Available to You */}
       <motion.div variants={fadeUp} className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-foreground">Available to you</h2>
+          <h2 className="text-xl text-foreground">Available to you</h2>
           <button
             onClick={() => navigate("/marketplace")}
             className="text-sm font-medium text-foreground flex items-center gap-1 hover:underline"
@@ -234,9 +234,9 @@ export default function BenefitsHome() {
               className="happl-card cursor-pointer"
               onClick={() => navigate("/benefit/insurance")}
             >
-              <img src={b.icon} alt={b.title} className="w-16 h-16 object-contain mb-4" loading="lazy" />
-              <h3 className="font-semibold text-foreground">{b.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{b.subtitle}</p>
+              <img src={b.icon} alt={b.title} className="w-20 h-20 object-contain mb-4" loading="lazy" />
+              <h3 className="font-medium text-foreground">{b.title}</h3>
+              <p className="text-sm text-muted-foreground mb-4 font-light">{b.subtitle}</p>
               <span className={`happl-badge text-xs ${b.action === "Available" ? "bg-muted text-muted-foreground" : "bg-accent/15 text-accent"}`}>
                 {b.action}
               </span>
