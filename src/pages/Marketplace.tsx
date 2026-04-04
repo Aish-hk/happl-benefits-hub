@@ -56,9 +56,9 @@ export default function Marketplace() {
         <p className="text-muted-foreground mt-1 font-light">Explore, compare, and activate your employee benefits</p>
       </motion.div>
 
-      {/* Search + Bordered Tabs (Compliance Hub style) */}
+      {/* Search + Underline Tabs */}
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-8">
-        <div className="relative max-w-[320px] mb-5">
+        <div className="relative max-w-[320px] mb-6">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
@@ -68,25 +68,32 @@ export default function Marketplace() {
             className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-card border border-border text-sm font-light focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           />
         </div>
-        {/* Bordered pill tabs like Compliance Hub */}
-        <div className="flex items-center gap-2">
+        {/* Underline tabs like reference */}
+        <div className="flex items-center gap-0 border-b border-border">
           {categories.map((cat) => (
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
-              className={`px-5 py-2 rounded-full text-sm border transition-all duration-200 ${
+              className={`relative px-5 py-3 text-sm transition-all duration-200 ${
                 activeCategory === cat.value
-                  ? "bg-primary text-primary-foreground border-primary font-medium"
-                  : "bg-transparent text-muted-foreground border-border hover:text-foreground hover:border-foreground/30 font-light"
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground font-light"
               }`}
             >
               {cat.label}
+              {activeCategory === cat.value && (
+                <motion.div
+                  layoutId="marketplace-tab-indicator"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
             </button>
           ))}
         </div>
       </motion.div>
 
-      {/* Benefits Grid — card style with Switch Provider / Opt-in */}
+      {/* Benefits Grid */}
       <motion.div layout className="grid grid-cols-2 gap-4">
         <AnimatePresence mode="popLayout">
           {filtered.map((b, i) => {
@@ -115,20 +122,12 @@ export default function Marketplace() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-foreground/80">{b.contribution}</span>
                       {isEnrollable ? (
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={(e) => { e.stopPropagation(); navigate("/benefit/insurance"); }}
-                            className="px-3 py-1.5 rounded-lg border border-border text-[11px] font-medium text-foreground hover:bg-secondary transition-all"
-                          >
-                            Switch Provider
-                          </button>
-                          <button
-                            onClick={(e) => { e.stopPropagation(); navigate(`/enroll/${b.id}`); }}
-                            className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-[11px] font-medium hover:brightness-110 transition-all"
-                          >
-                            Opt-in
-                          </button>
-                        </div>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); navigate(`/enroll/${b.id}`); }}
+                          className="px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-[11px] font-medium hover:brightness-110 transition-all"
+                        >
+                          Enrol
+                        </button>
                       ) : (
                         <motion.span className="text-xs font-medium text-accent flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           View details <ChevronRight size={12} />
