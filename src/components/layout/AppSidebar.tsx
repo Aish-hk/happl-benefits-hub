@@ -93,25 +93,25 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
 
       {/* Bottom */}
       <div className="px-2 pb-4">
-        <div className="border-t border-sidebar-border pt-3 space-y-1">
-          {bottomItems.map((item) => (
+        {!collapsed && (
+          <div className="border-t border-sidebar-border pt-3 space-y-1">
+            {bottomItems.map((item) => (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200"
+              >
+                {item.label}
+              </button>
+            ))}
             <button
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              title={collapsed ? item.label : undefined}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200"
             >
-              {collapsed ? item.label.charAt(0) : item.label}
+              <LogOut size={16} />
+              Logout
             </button>
-          ))}
-          <button
-            title={collapsed ? "Logout" : undefined}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-light text-sidebar-foreground/60 hover:text-destructive hover:bg-sidebar-accent/50 transition-all duration-200 ${collapsed ? "justify-center" : ""}`}
-          >
-            <LogOut size={16} />
-            {!collapsed && "Logout"}
-          </button>
-        </div>
+          </div>
+        )}
 
         {!collapsed && (
           <div className="mt-4 px-3 flex items-center gap-3">
@@ -129,10 +129,10 @@ export default function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
           </div>
         )}
         {collapsed && (
-          <div className="mt-4 flex justify-center">
-            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-medium">
+          <div className="flex justify-center">
+            <button onClick={onToggle} className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xs font-medium">
               SM
-            </div>
+            </button>
           </div>
         )}
       </div>
