@@ -62,13 +62,17 @@ export default function Marketplace() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 }}
-        className="relative rounded-2xl overflow-hidden mb-8 h-[200px]"
+        className="relative rounded-2xl overflow-hidden mb-8 h-[320px]"
       >
         <img src={marketplaceHero} alt="Benefits Marketplace" className="w-full h-full object-cover" width={1200} height={512} />
         <div className="absolute top-4 left-4">
           <span className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-[11px] font-medium shadow-md">
             NEW PARTNERSHIP
           </span>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 px-6 py-5 bg-gradient-to-t from-black/60 to-transparent">
+          <h2 className="text-white text-lg font-medium">Wellness & Mental Health Partnership</h2>
+          <p className="text-white/80 text-sm font-light mt-1">New exclusive benefits from our partners — explore counselling, fitness and more.</p>
         </div>
       </motion.div>
 
