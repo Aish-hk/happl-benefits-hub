@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Clock } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import happlIcon from "@/assets/happl-icon.png";
 
 import iconTotalValue from "@/assets/icons/total-value.png";
 import iconActiveBenefits from "@/assets/icons/active-benefits.png";
@@ -53,16 +54,22 @@ const allowances = [
     title: "Wellbeing Allowance",
     provider: "Happl Spend",
     icon: iconFlexAllowance,
-    spent: 450,
+    spent: 150,
     total: 600,
+    yourCost: "€0",
+    monthly: "€41.41",
+    totalSaved: "€1,490.40",
     resets: "Resets Jan 2027",
   },
   {
     title: "Learning & Development",
     provider: "Happl Spend",
     icon: iconLearning,
-    spent: 800,
+    spent: 200,
     total: 1000,
+    yourCost: "€0",
+    monthly: "€83.33",
+    totalSaved: "€800.00",
     resets: "Resets Jan 2027",
   },
 ];
@@ -99,7 +106,7 @@ export default function BenefitsHome() {
         <p className="text-muted-foreground mt-1 font-light">Here's your benefits overview</p>
       </motion.div>
 
-      {/* Quick Stats — big cards with oversized 3D icons */}
+      {/* Quick Stats */}
       <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-10">
         {quickStats.map((stat) => (
           <motion.div
@@ -107,7 +114,6 @@ export default function BenefitsHome() {
             whileHover={{ scale: 1.02, y: -2 }}
             className={`relative rounded-2xl p-6 pt-16 overflow-visible ${stat.bg} text-white shadow-lg`}
           >
-            {/* Oversized 3D icon breaking out of card */}
             <motion.img
               src={stat.icon}
               alt={stat.label}
@@ -176,7 +182,7 @@ export default function BenefitsHome() {
         </div>
       </motion.div>
 
-      {/* Your Allowances */}
+      {/* Your Allowances — Tax Breakdown / NI Savings style */}
       <motion.div variants={fadeUp} className="mb-10">
         <h2 className="text-xl text-foreground mb-4">Your allowances</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -194,11 +200,13 @@ export default function BenefitsHome() {
                   <p className="text-sm text-accent font-light">{a.provider}</p>
                 </div>
               </div>
+
+              {/* Progress */}
               <div className="flex items-baseline gap-2 mb-2">
                 <AnimatedCounter value={a.spent} prefix="€" className="text-3xl font-semibold text-foreground" />
                 <span className="text-sm text-muted-foreground font-light">of €{a.total.toLocaleString()}</span>
               </div>
-              <div className="h-2 rounded-full bg-muted overflow-hidden mb-2">
+              <div className="h-2 rounded-full bg-muted overflow-hidden mb-4">
                 <motion.div
                   className="h-full rounded-full bg-accent"
                   initial={{ width: 0 }}
@@ -206,13 +214,36 @@ export default function BenefitsHome() {
                   transition={{ duration: 0.8, delay: 0.3 }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground font-light">{a.resets}</p>
+
+              {/* NI Savings Calculator card — light green */}
+              <div className="rounded-xl bg-accent/10 border border-accent/20 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <img src={happlIcon} alt="Happl" className="w-6 h-6 rounded-md object-cover" />
+                  <span className="text-sm font-medium text-foreground">NI Savings Calculator</span>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <p className="text-[10px] font-medium text-accent tracking-wide">Your Cost</p>
+                    <p className="text-base font-semibold text-foreground">{a.yourCost}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-medium text-accent tracking-wide">Monthly</p>
+                    <p className="text-base font-semibold text-foreground">{a.monthly}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-medium text-accent tracking-wide">Total</p>
+                    <p className="text-base font-semibold text-foreground">{a.totalSaved}</p>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-xs text-muted-foreground font-light mt-3">{a.resets}</p>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-      {/* Available to You */}
+      {/* Available to You — with Switch Provider / Opt-in buttons */}
       <motion.div variants={fadeUp} className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl text-foreground">Available to you</h2>
@@ -237,9 +268,20 @@ export default function BenefitsHome() {
               <img src={b.icon} alt={b.title} className="w-20 h-20 object-contain mb-4" loading="lazy" />
               <h3 className="font-medium text-foreground">{b.title}</h3>
               <p className="text-sm text-muted-foreground mb-4 font-light">{b.subtitle}</p>
-              <span className={`happl-badge text-xs ${b.action === "Available" ? "bg-muted text-muted-foreground" : "bg-accent/15 text-accent"}`}>
-                {b.action}
-              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={(e) => { e.stopPropagation(); navigate("/benefit/insurance"); }}
+                  className="px-4 py-2 rounded-lg border border-border text-xs font-medium text-foreground hover:bg-secondary transition-all"
+                >
+                  Switch Provider
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); navigate(`/enroll/${b.title.toLowerCase().replace(/ /g, '-')}`); }}
+                  className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:brightness-110 transition-all"
+                >
+                  Opt-in
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>
