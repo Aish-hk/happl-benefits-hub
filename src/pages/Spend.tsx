@@ -35,7 +35,7 @@ export default function Spend() {
       {/* Summary cards */}
       <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-10">
         <div className="happl-card p-6">
-          <p className="text-xs font-medium tracking-wider text-muted-foreground mb-2">TOTAL BENEFITS VALUE</p>
+          <p className="text-xs font-medium tracking-wider text-muted-foreground mb-2">TOTAL CONTRIBUTION</p>
           <AnimatedCounter value={250750} prefix="€" className="text-3xl font-semibold text-foreground" />
           <div className="flex items-center gap-4 mt-3">
             <div>
