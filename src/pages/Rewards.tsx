@@ -52,7 +52,7 @@ export default function Rewards() {
   };
 
   return (
-    <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1000px]">
+    <motion.div variants={stagger} initial="hidden" animate="show" className="w-full">
       <motion.div variants={fadeUp} className="mb-8">
         <h1 className="text-3xl text-foreground">Rewards</h1>
         <p className="text-muted-foreground mt-1 font-light">Earn points by engaging with your benefits</p>

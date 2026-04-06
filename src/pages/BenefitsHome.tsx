@@ -123,7 +123,7 @@ export default function BenefitsHome() {
   const navigate = useNavigate();
 
   return (
-    <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[1000px]">
+    <motion.div variants={stagger} initial="hidden" animate="show" className="w-full">
       {/* Greeting */}
       <motion.div variants={fadeUp} className="mb-8">
         <h1 className="text-3xl text-foreground">Good morning, Sarah</h1>

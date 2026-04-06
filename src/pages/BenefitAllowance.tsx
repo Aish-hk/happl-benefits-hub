@@ -25,7 +25,7 @@ export default function BenefitAllowance() {
   const remaining = total - spent;
 
   return (
-    <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[960px]">
+    <motion.div variants={stagger} initial="hidden" animate="show" className="w-full">
       {/* Breadcrumb */}
       <motion.div variants={fadeUp} className="flex items-center gap-2 text-sm text-muted-foreground mb-4 font-light">
         <button onClick={() => navigate("/marketplace")} className="hover:text-foreground transition-colors">Benefits</button>
