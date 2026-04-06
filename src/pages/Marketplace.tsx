@@ -51,7 +51,7 @@ export default function Marketplace() {
   });
 
   return (
-    <div className="max-w-[1100px]">
+    <div className="w-full">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <h1 className="text-3xl text-foreground">Benefits Marketplace</h1>
         <p className="text-muted-foreground mt-1 font-light">Explore, compare, and activate your employee benefits</p>
