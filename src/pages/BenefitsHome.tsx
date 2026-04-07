@@ -158,7 +158,7 @@ export default function BenefitsHome() {
                   : "text-muted-foreground hover:text-foreground font-light"
               }`}
             >
-              {cat.emoji && <span className="mr-1">{cat.emoji}</span>}{cat.label}
+              {cat.label}
             </button>
           ))}
         </div>

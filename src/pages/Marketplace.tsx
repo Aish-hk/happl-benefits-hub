@@ -160,7 +160,7 @@ export default function Marketplace() {
                   : "bg-card text-muted-foreground border-border hover:text-foreground font-light"
               }`}
             >
-              {cat.emoji && <span className="mr-1">{cat.emoji}</span>}{cat.label}
+              {cat.label}
             </button>
           ))}
 
