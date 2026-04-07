@@ -33,7 +33,7 @@ export default function EnrollmentFlow() {
 
   const fireConfetti = useCallback(() => {
     const end = Date.now() + 2000;
-    const colors = ["#04E898", "#163b3b", "#f5f3ef", "#FFD700"];
+    const colors = ["#A5D851", "#D0FF83", "#163b3b", "#f5f3ef", "#FFD700"];
     (function frame() {
       confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors });
       confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors });
