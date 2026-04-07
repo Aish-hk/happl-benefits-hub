@@ -15,6 +15,12 @@ import iconLifeInsurance from "@/assets/icons/life-insurance.png";
 import iconCycleToWork from "@/assets/icons/cycle-to-work.png";
 import iconLearning from "@/assets/icons/learning.png";
 
+import iconCatInsurance from "@/assets/icons/category-insurance.png";
+import iconCatAllowances from "@/assets/icons/category-allowances.png";
+import iconCatCompany from "@/assets/icons/category-company.png";
+import iconCatPension from "@/assets/icons/category-pension.png";
+import iconCatSacrifice from "@/assets/icons/category-sacrifice.png";
+
 import mentalHealthImg from "@/assets/mental-health-card.jpg";
 import evSchemeImg from "@/assets/ev-scheme-card.jpg";
 import travelInsuranceImg from "@/assets/travel-insurance-card.jpg";
@@ -60,11 +66,11 @@ const availableBenefits = [
 ];
 
 const browseCategoryCards = [
-  { label: "Insurance", count: "5 benefits", subtitle: "PMI, Dental, Life", emoji: "🛡️", stripeColor: "bg-destructive/20", value: "insurance" },
-  { label: "Allowances", count: "2 benefits", subtitle: "Wellbeing, L&D", emoji: "💳", stripeColor: "bg-tier-premium-bg", value: "allowance" },
-  { label: "Company", count: "1 benefit", subtitle: "Annual Leave", emoji: "🏢", stripeColor: "bg-tier-benefits-bg", value: "company" },
-  { label: "Pension & Gov", count: "2 benefits", subtitle: "Pension, Cycle", emoji: "🏦", stripeColor: "bg-tier-govt-bg", value: "pension-gov" },
-  { label: "Salary Sacrifice", count: "2 benefits", subtitle: "EV, Cycle", emoji: "⚡", stripeColor: "bg-tier-sacrifice-bg", value: "salary-sacrifice" },
+  { label: "Insurance", count: "5 benefits", subtitle: "PMI, Dental, Life", icon: iconCatInsurance, stripeColor: "bg-destructive/20", value: "insurance" },
+  { label: "Allowances", count: "2 benefits", subtitle: "Wellbeing, L&D", icon: iconCatAllowances, stripeColor: "bg-tier-premium-bg", value: "allowance" },
+  { label: "Company", count: "1 benefit", subtitle: "Annual Leave", icon: iconCatCompany, stripeColor: "bg-tier-benefits-bg", value: "company" },
+  { label: "Pension & Gov", count: "2 benefits", subtitle: "Pension, Cycle", icon: iconCatPension, stripeColor: "bg-tier-govt-bg", value: "pension-gov" },
+  { label: "Salary Sacrifice", count: "2 benefits", subtitle: "EV, Cycle", icon: iconCatSacrifice, stripeColor: "bg-tier-sacrifice-bg", value: "salary-sacrifice" },
 ];
 
 export default function BenefitsHome() {
@@ -139,7 +145,7 @@ export default function BenefitsHome() {
         })}
       </motion.div>
 
-      {/* Category Tabs */}
+      {/* Category Tabs - below cards */}
       <motion.div variants={fadeUp} className="mb-10">
         <div className="flex items-center gap-2 flex-wrap bg-card border border-border rounded-2xl p-2">
           {benefitCategories.map((cat) => (
@@ -226,7 +232,7 @@ export default function BenefitsHome() {
               >
                 <div className={`h-1 ${cat.stripeColor}`} />
                 <div className="p-4">
-                  <span className="text-2xl">{cat.emoji}</span>
+                  <img src={cat.icon} alt={cat.label} className="w-12 h-12 object-contain" loading="lazy" />
                   <h3 className="font-medium text-foreground mt-2 text-sm">{cat.label}</h3>
                   <p className="text-xs text-accent font-medium">{cat.count}</p>
                   <p className="text-xs text-muted-foreground font-light mt-1">{cat.subtitle}</p>
