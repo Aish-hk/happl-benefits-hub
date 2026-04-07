@@ -24,50 +24,51 @@
     --muted: 40 12% 88%;
     --muted-foreground: 168 20% 40%;
 
-    --accent: 157 97% 46%;
-    --accent-foreground: 168 45% 10%;
+    --accent: 82 62% 58%;
+    --accent-foreground: 82 40% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 40 15% 85%;
     --input: 40 15% 85%;
-    --ring: 157 97% 46%;
+    --ring: 82 62% 58%;
 
     --radius: 0.75rem;
 
     --sidebar-background: 168 45% 16%;
     --sidebar-foreground: 40 20% 95%;
-    --sidebar-primary: 157 97% 46%;
+    --sidebar-primary: 82 62% 58%;
     --sidebar-primary-foreground: 168 45% 10%;
     --sidebar-accent: 168 40% 22%;
     --sidebar-accent-foreground: 40 20% 95%;
     --sidebar-border: 168 35% 25%;
-    --sidebar-ring: 157 97% 46%;
+    --sidebar-ring: 82 62% 58%;
 
     /* Custom tokens */
     --happl-primary: 168 45% 16%;
-    --happl-accent: 157 97% 46%;
+    --happl-accent: 82 62% 58%;
+    --happl-accent-light: 83 100% 76%;
     --happl-cream: 40 20% 95%;
     --happl-cream-dark: 40 15% 90%;
     --happl-teal-light: 168 35% 25%;
-    --happl-success: 157 70% 40%;
+    --happl-success: 82 62% 58%;
     --happl-warning: 38 92% 50%;
     --happl-info: 210 80% 55%;
 
     /* Tier badge tokens */
-    --tier-benefits: 157 70% 40%;
-    --tier-benefits-bg: 149 80% 93%;
+    --tier-benefits: 82 50% 42%;
+    --tier-benefits-bg: 83 60% 90%;
     --tier-govt: 210 80% 55%;
     --tier-govt-bg: 214 95% 93%;
     --tier-standard: 25 90% 48%;
     --tier-standard-bg: 29 100% 93%;
     --tier-premium: 263 70% 50%;
     --tier-premium-bg: 263 83% 95%;
-    --tier-sacrifice: 174 80% 29%;
-    --tier-sacrifice-bg: 166 76% 93%;
+    --tier-sacrifice: 82 45% 38%;
+    --tier-sacrifice-bg: 83 55% 90%;
 
-    --gradient-accent: linear-gradient(135deg, hsl(157 97% 46%), hsl(168 60% 35%));
+    --gradient-accent: linear-gradient(135deg, hsl(82 62% 58%), hsl(83 100% 76%));
     --gradient-primary: linear-gradient(135deg, hsl(168 45% 16%), hsl(168 35% 25%));
     --gradient-card-hover: linear-gradient(180deg, hsl(40 20% 97%), hsl(40 15% 93%));
 
