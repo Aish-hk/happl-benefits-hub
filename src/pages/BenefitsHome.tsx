@@ -49,6 +49,8 @@ const allowances = [
 const activeBenefits = [
   { title: "Health Insurance", subtitle: "Bupa · Comprehensive PMI", icon: iconHealthInsurance, status: "Active", tier: "standard" as TierType },
   { title: "Life Insurance", subtitle: "Aviva · 4x salary cover", icon: iconLifeInsurance, status: "Active", tier: "standard" as TierType },
+  { title: "Annual Leave", subtitle: "25 days + bank holidays", icon: iconFlexAllowance, status: "Active", tier: "benefits" as TierType },
+  { title: "Workplace Pension", subtitle: "Scottish Widows · 5% employer match", icon: iconTotalValue, status: "Active", tier: "govt" as TierType },
 ];
 
 const availableBenefits = [
@@ -91,27 +93,8 @@ export default function BenefitsHome() {
         <p className="text-muted-foreground mt-1 font-light">Here's your benefits overview</p>
       </motion.div>
 
-      {/* Category Tabs */}
-      <motion.div variants={fadeUp} className="mb-8">
-        <div className="flex items-center gap-2 flex-wrap bg-card border border-border rounded-2xl p-2">
-          {benefitCategories.map((cat) => (
-            <button
-              key={cat.value}
-              onClick={() => setActiveTab(cat.value)}
-              className={`px-4 py-2 rounded-xl text-sm transition-all ${
-                activeTab === cat.value
-                  ? "bg-primary text-primary-foreground font-medium"
-                  : "text-muted-foreground hover:text-foreground font-light"
-              }`}
-            >
-              {cat.emoji && <span className="mr-1">{cat.emoji}</span>}{cat.label}
-            </button>
-          ))}
-        </div>
-      </motion.div>
-
       {/* Quick Stats */}
-      <motion.div variants={fadeUp} className="grid grid-cols-4 gap-4 mb-10">
+      <motion.div variants={fadeUp} className="grid grid-cols-4 gap-4 mb-6">
         {quickStats.map((stat, idx) => {
           const isDark = idx === 0;
           const isFlex = idx === 3;
@@ -156,7 +139,24 @@ export default function BenefitsHome() {
         })}
       </motion.div>
 
-      {/* Enrollment Window */}
+      {/* Category Tabs */}
+      <motion.div variants={fadeUp} className="mb-10">
+        <div className="flex items-center gap-2 flex-wrap bg-card border border-border rounded-2xl p-2">
+          {benefitCategories.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setActiveTab(cat.value)}
+              className={`px-4 py-2 rounded-xl text-sm transition-all ${
+                activeTab === cat.value
+                  ? "bg-primary text-primary-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground font-light"
+              }`}
+            >
+              {cat.emoji && <span className="mr-1">{cat.emoji}</span>}{cat.label}
+            </button>
+          ))}
+        </div>
+      </motion.div>
       {filteredEnrollment.length > 0 && (
         <motion.div variants={fadeUp} className="mb-10">
           <div className="flex items-center justify-between mb-4">
