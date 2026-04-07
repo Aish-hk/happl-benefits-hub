@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, ExternalLink } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
+import TierBadge from "@/components/TierBadge";
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
@@ -43,6 +44,7 @@ export default function BenefitAllowance() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-semibold text-foreground">Wellbeing Allowance</h1>
+            <TierBadge tier="premium" />
             <span className="happl-badge bg-accent/15 text-accent text-xs flex items-center gap-1">
               <Check size={10} /> Active
             </span>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Clock, ExternalLink, ArrowRight } from "lucide-react";
 import iconHealthInsurance from "@/assets/icons/health-insurance.png";
+import TierBadge from "@/components/TierBadge";
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
@@ -51,6 +52,7 @@ export default function BenefitInsurance() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-semibold text-foreground">Private Medical Insurance</h1>
+            <TierBadge tier="standard" />
             <span className="happl-badge bg-happl-warning/15 text-happl-warning text-xs flex items-center gap-1">
               <Clock size={10} /> 14d left
             </span>
