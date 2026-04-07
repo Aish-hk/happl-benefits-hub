@@ -3,23 +3,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Gift, ArrowRight } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-import iconCheckCircle from "@/assets/icons/check-circle.png";
-import iconTrendingUp from "@/assets/icons/trending-up.png";
 import iconFlexAllowance from "@/assets/icons/flex-allowance.png";
 import iconDayOff from "@/assets/icons/day-off.png";
 import iconGiftVoucher from "@/assets/icons/gift-voucher.png";
 import iconCharity from "@/assets/icons/charity.png";
 import iconTeamLunch from "@/assets/icons/team-lunch.png";
+import iconChampion from "@/assets/icons/rewards-champion.png";
+import iconEarlyAdopter from "@/assets/icons/rewards-early-adopter.png";
+import iconTeamPlayer from "@/assets/icons/rewards-team-player.png";
+import iconFullCoverage from "@/assets/icons/rewards-full-coverage.png";
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
 const rewards = [
-  { title: "Benefits Champion", desc: "Enrolled in 5+ benefits", icon: iconCheckCircle, earned: true, points: 200 },
-  { title: "Early Adopter", desc: "Activated benefits in first week", icon: iconTrendingUp, earned: true, points: 150 },
+  { title: "Benefits Champion", desc: "Enrolled in 5+ benefits", icon: iconChampion, earned: true, points: 200 },
+  { title: "Early Adopter", desc: "Activated benefits in first week", icon: iconEarlyAdopter, earned: true, points: 150 },
   { title: "Wellness Warrior", desc: "Used wellbeing allowance 3 months in a row", icon: iconFlexAllowance, earned: true, points: 300 },
-  { title: "Team Player", desc: "Referred a colleague to a benefit", icon: iconCheckCircle, earned: false, points: 100 },
-  { title: "Full Coverage", desc: "Activate all available benefits", icon: iconTrendingUp, earned: false, points: 500 },
+  { title: "Team Player", desc: "Referred a colleague to a benefit", icon: iconTeamPlayer, earned: false, points: 100 },
+  { title: "Full Coverage", desc: "Activate all available benefits", icon: iconFullCoverage, earned: false, points: 500 },
 ];
 
 const redeemOptions = [
