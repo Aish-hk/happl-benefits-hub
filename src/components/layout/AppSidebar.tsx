@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
-import happlLogo from "@/assets/happl-logo.png";
+import happlLogo from "@/assets/happl-logo-white.png";
 import happlIcon from "@/assets/happl-icon.png";
 
 const navItems = [
