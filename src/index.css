@@ -55,6 +55,18 @@
     --happl-warning: 38 92% 50%;
     --happl-info: 210 80% 55%;
 
+    /* Tier badge tokens */
+    --tier-benefits: 157 70% 40%;
+    --tier-benefits-bg: 149 80% 93%;
+    --tier-govt: 210 80% 55%;
+    --tier-govt-bg: 214 95% 93%;
+    --tier-standard: 25 90% 48%;
+    --tier-standard-bg: 29 100% 93%;
+    --tier-premium: 263 70% 50%;
+    --tier-premium-bg: 263 83% 95%;
+    --tier-sacrifice: 174 80% 29%;
+    --tier-sacrifice-bg: 166 76% 93%;
+
     --gradient-accent: linear-gradient(135deg, hsl(157 97% 46%), hsl(168 60% 35%));
     --gradient-primary: linear-gradient(135deg, hsl(168 45% 16%), hsl(168 35% 25%));
     --gradient-card-hover: linear-gradient(180deg, hsl(40 20% 97%), hsl(40 15% 93%));

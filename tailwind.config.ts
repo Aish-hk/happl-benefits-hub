@@ -73,6 +73,18 @@ export default {
           warning: "#F5A623",
           info: "#3B82F6",
         },
+        tier: {
+          benefits: "hsl(var(--tier-benefits))",
+          "benefits-bg": "hsl(var(--tier-benefits-bg))",
+          govt: "hsl(var(--tier-govt))",
+          "govt-bg": "hsl(var(--tier-govt-bg))",
+          standard: "hsl(var(--tier-standard))",
+          "standard-bg": "hsl(var(--tier-standard-bg))",
+          premium: "hsl(var(--tier-premium))",
+          "premium-bg": "hsl(var(--tier-premium-bg))",
+          sacrifice: "hsl(var(--tier-sacrifice))",
+          "sacrifice-bg": "hsl(var(--tier-sacrifice-bg))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
