@@ -28,7 +28,6 @@ export const benefitCategories = [
 ];
 
 export const statusFilters = [
-  { label: "All", value: "all" },
   { label: "Available", value: "available" },
   { label: "Enrolled", value: "enrolled" },
 ];
