@@ -42,27 +42,27 @@ const quickStats = [
 ];
 
 const enrollmentItems = [
-  { title: "Private Medical Insurance", provider: "Bupa · Comprehensive PMI", icon: iconHealthInsurance, daysLeft: 14, tier: "standard" as TierType },
-  { title: "Dental Plan", provider: "Denplan · Routine + emergency", icon: iconLifeInsurance, daysLeft: 14, tier: "standard" as TierType },
-  { title: "Cycle to Work", provider: "Cyclescheme · Salary sacrifice", icon: iconCycleToWork, daysLeft: 30, tier: "govt" as TierType },
+  { id: "health-insurance", title: "Private Medical Insurance", provider: "Bupa · Comprehensive PMI", icon: iconHealthInsurance, daysLeft: 14, tier: "standard" as TierType },
+  { id: "dental-plan", title: "Dental Plan", provider: "Denplan · Routine + emergency", icon: iconLifeInsurance, daysLeft: 14, tier: "standard" as TierType },
+  { id: "cycle-to-work", title: "Cycle to Work", provider: "Cyclescheme · Salary sacrifice", icon: iconCycleToWork, daysLeft: 30, tier: "govt" as TierType },
 ];
 
 const allowances = [
-  { title: "Wellbeing Allowance", provider: "Happl Spend", icon: iconFlexAllowance, spent: 150, total: 600, remaining: 450, resets: "Resets Jan 2027", tier: "premium" as TierType },
-  { title: "Learning & Development", provider: "Happl Spend", icon: iconLearning, spent: 200, total: 1000, remaining: 800, resets: "Resets Jan 2027", tier: "premium" as TierType },
+  { id: "wellbeing-allowance", title: "Wellbeing Allowance", provider: "Happl Spend", icon: iconFlexAllowance, spent: 150, total: 600, remaining: 450, resets: "Resets Jan 2027", tier: "premium" as TierType },
+  { id: "learning-budget", title: "Learning & Development", provider: "Happl Spend", icon: iconLearning, spent: 200, total: 1000, remaining: 800, resets: "Resets Jan 2027", tier: "premium" as TierType },
 ];
 
 const activeBenefits = [
-  { title: "Health Insurance", subtitle: "Bupa · Comprehensive PMI", icon: iconHealthInsurance, status: "Active", tier: "standard" as TierType },
-  { title: "Life Insurance", subtitle: "Aviva · 4x salary cover", icon: iconLifeInsurance, status: "Active", tier: "standard" as TierType },
-  { title: "Annual Leave", subtitle: "25 days + bank holidays", icon: iconFlexAllowance, status: "Active", tier: "benefits" as TierType },
-  { title: "Workplace Pension", subtitle: "Scottish Widows · 5% employer match", icon: iconTotalValue, status: "Active", tier: "govt" as TierType },
+  { id: "health-insurance", title: "Health Insurance", subtitle: "Bupa · Comprehensive PMI", icon: iconHealthInsurance, status: "Active", tier: "standard" as TierType },
+  { id: "life-insurance", title: "Life Insurance", subtitle: "Aviva · 4x salary cover", icon: iconLifeInsurance, status: "Active", tier: "standard" as TierType },
+  { id: "annual-leave", title: "Annual Leave", subtitle: "25 days + bank holidays", icon: iconFlexAllowance, status: "Active", tier: "benefits" as TierType },
+  { id: "workplace-pension", title: "Workplace Pension", subtitle: "Scottish Widows · 5% employer match", icon: iconTotalValue, status: "Active", tier: "govt" as TierType },
 ];
 
 const availableBenefits = [
-  { title: "Mental Health Support", subtitle: "Spill · 8 free therapy sessions", image: mentalHealthImg, tag: "Quick activate", tagColor: "bg-accent text-white", tier: "premium" as TierType },
-  { title: "Electric Vehicle Scheme", subtitle: "Octopus EV · Save up to 40%", image: evSchemeImg, tag: "Enrollment open", tagColor: "bg-happl-warning text-white", tier: "sacrifice" as TierType },
-  { title: "Travel Insurance", subtitle: "AXA · Worldwide cover", image: travelInsuranceImg, tag: "Quick activate", tagColor: "bg-accent text-white", tier: "premium" as TierType },
+  { id: "mental-health", title: "Mental Health Support", subtitle: "Spill · 8 free therapy sessions", image: mentalHealthImg, tag: "Quick activate", tagColor: "bg-accent text-white", tier: "premium" as TierType },
+  { id: "ev-scheme", title: "Electric Vehicle Scheme", subtitle: "Octopus EV · Save up to 40%", image: evSchemeImg, tag: "Enrollment open", tagColor: "bg-happl-warning text-white", tier: "sacrifice" as TierType },
+  { id: "travel-insurance", title: "Travel Insurance", subtitle: "AXA · Worldwide cover", image: travelInsuranceImg, tag: "Quick activate", tagColor: "bg-accent text-white", tier: "premium" as TierType },
 ];
 
 const browseCategoryCards = [
