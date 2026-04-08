@@ -68,8 +68,8 @@ export default function Marketplace() {
 
   const getAction = (b: Benefit) => {
     if (b.status === "available" || b.status === "enrollment") return { label: "Enrol →", action: () => navigate(`/enroll/${b.id}`) };
-    if (b.status === "active" && b.category === "allowance") return { label: "Spend", action: () => navigate("/benefit/allowance") };
-    return { label: "Manage", action: () => navigate(b.category === "allowance" ? "/benefit/allowance" : "/benefit/insurance") };
+    if (b.status === "active" && b.category === "allowance") return { label: "Spend", action: () => navigate(`/benefit/${b.id}`) };
+    return { label: "Manage", action: () => navigate(`/benefit/${b.id}`) };
   };
 
   return (
@@ -212,7 +212,7 @@ export default function Marketplace() {
                   transition={{ duration: 0.3, delay: i * 0.04 }}
                   whileHover={{ scale: 1.015, y: -2 }}
                   className="happl-card cursor-pointer group"
-                  onClick={() => navigate(b.category === "allowance" ? "/benefit/allowance" : "/benefit/insurance")}
+                  onClick={() => navigate(`/benefit/${b.id}`)}
                 >
                   <div className="flex items-start gap-4">
                     <img src={b.icon} alt={b.title} className="w-16 h-16 object-contain shrink-0" loading="lazy" />
@@ -254,7 +254,7 @@ export default function Marketplace() {
                   <tr
                     key={b.id}
                     className="hover:bg-muted/30 cursor-pointer transition-colors"
-                    onClick={() => navigate(b.category === "allowance" ? "/benefit/allowance" : "/benefit/insurance")}
+                    onClick={() => navigate(`/benefit/${b.id}`)}
                   >
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-3">
