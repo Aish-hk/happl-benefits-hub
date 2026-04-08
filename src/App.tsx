@@ -11,6 +11,7 @@ import EnrollmentFlow from "./pages/EnrollmentFlow";
 import Spend from "./pages/Spend";
 import Rewards from "./pages/Rewards";
 import NotFound from "./pages/NotFound";
+import IconsCollection from "./pages/IconsCollection";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/icons" element={<IconsCollection />} />
           <Route element={<AppLayout />}>
             <Route path="/" element={<BenefitsHome />} />
             <Route path="/marketplace" element={<Marketplace />} />
