@@ -185,7 +185,7 @@ export default function BenefitsHome() {
                   transition={{ delay: 0.2 + i * 0.08 }}
                   whileHover={{ x: 4, backgroundColor: "hsl(40 20% 96%)" }}
                   className="flex items-center justify-between px-6 py-4 cursor-pointer transition-colors"
-                  onClick={() => navigate("/benefit/insurance")}
+                  onClick={() => navigate(`/benefit/${item.id}`)}
                 >
                   <div className="flex items-center gap-4">
                     <img src={item.icon} alt={item.title} className="w-18 h-18 object-contain" loading="lazy" />
@@ -261,7 +261,7 @@ export default function BenefitsHome() {
                 transition={{ delay: 0.3 + i * 0.08 }}
                 whileHover={{ scale: 1.01, y: -2 }}
                 className="happl-card cursor-pointer flex items-center gap-4"
-                onClick={() => navigate("/benefit/insurance")}
+                onClick={() => navigate(`/benefit/${b.id}`)}
               >
                 <img src={b.icon} alt={b.title} className="w-20 h-20 object-contain" loading="lazy" />
                 <div className="flex-1">
@@ -288,7 +288,7 @@ export default function BenefitsHome() {
                 key={a.title}
                 whileHover={{ scale: 1.01, y: -2 }}
                 className="happl-card cursor-pointer relative"
-                onClick={() => navigate("/benefit/allowance")}
+                onClick={() => navigate(`/benefit/${a.id}`)}
               >
                 <div className="absolute top-4 right-4">
                   <TierBadge tier={a.tier} />
@@ -344,7 +344,7 @@ export default function BenefitsHome() {
                 transition={{ delay: 0.3 + i * 0.08 }}
                 whileHover={{ scale: 1.02, y: -2 }}
                 className="rounded-2xl overflow-hidden border border-border bg-card cursor-pointer shadow-sm"
-                onClick={() => navigate("/benefit/insurance")}
+                onClick={() => navigate(`/benefit/${b.id}`)}
               >
                 <div className="relative h-36 overflow-hidden">
                   <img src={b.image} alt={b.title} className="w-full h-full object-cover" loading="lazy" />
