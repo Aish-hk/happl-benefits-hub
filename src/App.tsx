@@ -6,8 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import AppLayout from "./components/layout/AppLayout";
 import BenefitsHome from "./pages/BenefitsHome";
 import Marketplace from "./pages/Marketplace";
-import BenefitInsurance from "./pages/BenefitInsurance";
-import BenefitAllowance from "./pages/BenefitAllowance";
+import BenefitDetail from "./pages/BenefitDetail";
 import EnrollmentFlow from "./pages/EnrollmentFlow";
 import Spend from "./pages/Spend";
 import Rewards from "./pages/Rewards";
@@ -25,8 +24,7 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<BenefitsHome />} />
             <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/benefit/insurance" element={<BenefitInsurance />} />
-            <Route path="/benefit/allowance" element={<BenefitAllowance />} />
+            <Route path="/benefit/:benefitId" element={<BenefitDetail />} />
             <Route path="/enroll/:benefitId" element={<EnrollmentFlow />} />
             <Route path="/spend" element={<Spend />} />
             <Route path="/rewards" element={<Rewards />} />
